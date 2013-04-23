@@ -1,65 +1,196 @@
-/* Custom container */
-.container-narrow {
-  margin: 0 auto;
-  max-width: 700px; }
+body {
+   /*background: url("/media/img/cardboard.png"); */
+}
 
-.container-narrow > hr {
-  margin: 30px 0; }
+#content {
+    width: 900px;
+    margin: 60px auto 0 auto;
+    font-family: 'Quicksand', sans-serif;
+}
 
-.navbar .nav {
-  float: right; }
+h1, ul, p {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 
-/* posts index */
-.post > h3.title {
-  position: relative;
-  padding-top: 10px; }
+a:hover {
+    border-bottom: 1px dotted #333;
+}
 
-.post > h3.title span.date {
-  position: absolute;
-  right: 0;
-  font-size: 0.9em; }
+a.undecorated:hover {
+    border-bottom: none;
+}
 
-.post > .more {
-  margin: 10px 0;
-  text-align: left; }
+a {
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+}
 
-/* post-full*/
-.post-full .date {
-  margin-bottom: 20px;
-  font-weight: bold; }
+a.media-link {
+    margin-right: 18px;
+}
 
-/* tag_box */
-.tag_box {
-  list-style: none;
-  margin: 0;
-  overflow: hidden; }
+span.info {
+    font-size: 18px;
+}
 
-.tag_box li {
-  line-height: 28px; }
+.link-li {
+    margin-bottom: 6px;
+}
 
-.tag_box li i {
-  opacity: 0.9; }
+h1 {
+    font-weight: bold;
+    font-size: 92px;
+    color: white;
+    /*text-shadow: -1px 0 black, 0 1px black,*/
+    /*1px 0 black, 0 -1px black*/
+    text-shadow: 2px 3px 5px black;
 
-.tag_box.inline li {
-  float: left; }
+}
 
-.tag_box a {
-  padding: 3px 6px;
-  margin: 2px;
-  background: #eee;
-  color: #555;
-  border-radius: 3px;
-  text-decoration: none;
-  border: 1px dashed #cccccc; }
+#details {
+    margin-top: 36px;
+    font-size: 22px;
+    list-style: none;
+    margin-left: 9px;
+    margin-bottom: 64px;
+}
 
-.tag_box a span {
-  vertical-align: super;
-  font-size: 0.8em; }
+#ets {
+    margin-top: 24px;
+}
+.excellent-thing {
+    padding: 12px;
+    margin-bottom: 12px;
+    margin-left: 12px;
+    float: left;
+    border: 1px solid #eee;
+    box-shadow: 0px 2px 7px #666;
+    background: white;
+}
 
-.tag_box a:hover {
-  background-color: #e5e5e5; }
+.et-img {
+    width: 180px;
+}
 
-.tag_box a.active {
-  background: #57A957;
-  border: 1px solid #4c964d;
-  color: #FFF; }
+#breadcrumbs {
+    border-bottom: 1px dotted #999;
+}
+
+#breadcrumbs, #footer {
+    margin: 0 12px;
+    padding: 12px 0;
+}
+
+#footer {
+    margin-top: 24px;
+    border-top: 1px #999 dotted;
+    font-size: 12px;
+    text-align: right;
+}
+
+#main-content {
+    margin: 24px 12px;
+}
+
+#poems a {
+    font-size: 26px;
+}
+
+#poem-content h1 {
+    margin-top: 12px;
+    margin-bottom: 36px;
+}
+
+#poem-content p {
+    line-height: 26px;
+    margin: 24px 0;
+}
+
+.detail-section {
+    /*margin: 24px 0;*/
+    padding-left: 36px;
+    margin-bottom: 48px;
+}
+
+h5.divider {
+    color:#333;
+    text-transform: uppercase;
+    border:0px solid red;
+    writing-mode:tb-rl;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform: rotate(90deg);
+    white-space:nowrap;
+    display:block;
+    top: -11px;
+    width:20px;
+    height:0px;
+    font-size:16px;
+    font-weight:normal;
+    position: relative;
+    margin-left: 15px;
+    float: left;
+}
+
+#name {
+    margin-left: 36px;
+}
+
+#ideas .intro {
+    margin: 24px 0;
+}
+
+#ideas ol {
+    padding-left: 20px;
+    margin: 0;
+}
+
+#ideas ol > li {
+    margin: 24px 0;
+}
+
+#inspirations li {
+    margin: 6px 0;
+    font-weight: bold;
+}
+
+#inspirations {
+    margin: 12px 0;
+}
+
+#dream-project {
+    color: #0B1036;
+    font-size: 18px;
+    line-height: 26px;
+}
+
+#dream-project h1 {
+    margin: 60px 0;
+}
+
+#dream-project pre {
+    padding: 12px;
+    margin: 24px 0;
+    /*font-weight: bold;*/
+    color: #ededed;
+    background: black;
+    margin: 36px 0;
+}
+
+#dream-project p {
+    /*text-indent: 48px;*/
+    margin-bottom: 36px;
+}
+
+#dream-project ul {
+    list-style-type:circle;
+    margin-left: 48px;
+    margin-bottom: 24px;
+}
+
+#dream-project ul > li{
+    margin-bottom: 6px;
+}
