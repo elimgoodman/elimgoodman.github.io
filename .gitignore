@@ -7,4 +7,6 @@ Thumbs.db
 !.gitkeep
 
 .rbenv-version
+*.sublime-workspace
+*.sublime-project
 .rvmrc
