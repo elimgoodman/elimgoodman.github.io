@@ -1,0 +1,70 @@
+body {
+   font-family: museo-sans, serif;
+   font-size: 18px;
+}
+
+h1 {
+	font-family: cubano, sans-serif;
+	font-size: 64px;
+	border-bottom: none;
+	color: #333;
+}
+
+.page-header {
+	border-bottom: none;
+}
+
+a:hover {
+	color: #363636;
+	text-decoration: none;
+}
+
+a {
+	border-bottom: 1px dotted #333;
+	color: #333;
+}
+
+a.media-link {
+	font-family: cubano, sans-serif;
+	font-size: 28px;
+	margin-right: 18px;
+	border-bottom: none;
+}
+
+a.media-link:hover {
+	border-bottom: 1px dotted #333;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+@media (max-width: 991px) {
+	body {
+		font-size: 16px;
+	}
+
+	a.media-link {
+		font-size: 22px;
+	}
+	ul.interest-list {
+		margin-bottom: 48px;
+	}
+	h1 {
+		font-size: 48px;
+	}
+}
+
+ul.interest-list > li {
+	margin-bottom: 6px;
+}
+
+#footer {
+	border-top: 1px dotted #333;
+	margin-top: 24px;
+	text-align: right;
+	padding-top: 12px;
+	font-size: 12px;
+}

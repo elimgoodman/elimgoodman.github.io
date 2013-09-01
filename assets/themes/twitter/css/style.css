@@ -1,11 +1,11 @@
 body {
    /*background: url("/media/img/cardboard.png"); */
+   font-family: museo-sans, serif;
 }
 
 #content {
     width: 900px;
     margin: 60px auto 0 auto;
-    font-family: 'Quicksand', sans-serif;
 }
 
 h1, ul, p {
@@ -29,11 +29,13 @@ a {
 }
 
 a.media-link {
+    font-size: 28px;
+    font-family: cubano, sans-serif;
     margin-right: 18px;
 }
 
 span.info {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .link-li {
@@ -41,21 +43,12 @@ span.info {
 }
 
 h1 {
-    font-weight: bold;
     font-size: 92px;
-    color: white;
-    /*text-shadow: -1px 0 black, 0 1px black,*/
-    /*1px 0 black, 0 -1px black*/
-    text-shadow: 2px 3px 5px black;
-
+    color: #333;
 }
 
-#details {
-    margin-top: 36px;
-    font-size: 22px;
-    list-style: none;
-    margin-left: 9px;
-    margin-bottom: 64px;
+.page-header {
+    border-bottom: none;
 }
 
 #ets {
@@ -113,26 +106,6 @@ h1 {
     /*margin: 24px 0;*/
     padding-left: 36px;
     margin-bottom: 48px;
-}
-
-h5.divider {
-    color:#333;
-    text-transform: uppercase;
-    border:0px solid red;
-    writing-mode:tb-rl;
-    -webkit-transform:rotate(90deg);
-    -moz-transform:rotate(90deg);
-    -o-transform: rotate(90deg);
-    white-space:nowrap;
-    display:block;
-    top: -11px;
-    width:20px;
-    height:0px;
-    font-size:16px;
-    font-weight:normal;
-    position: relative;
-    margin-left: 15px;
-    float: left;
 }
 
 #name {
