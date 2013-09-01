@@ -7,7 +7,7 @@ tags: []
 ---
 {% include JB/setup %}
 
-**TL;DR:**. I'm interested in arcades as a new kind of [third place](http://en.wikipedia.org/wiki/Third_place), one that incorporates what we've learned about game design in the past decade. I want to use this post as a way to think about what the arcade of the future could look like>
+**TL;DR:**. I'm interested in arcades as a new kind of [third place](http://en.wikipedia.org/wiki/Third_place), one that incorporates what we've learned about game design in the past decade. I want to use this post as a way to think about what the arcade of the future could look like.
 
 ###Third Places
 
