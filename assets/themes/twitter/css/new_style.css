@@ -31,6 +31,11 @@ a.media-link {
 	border-bottom: none;
 }
 
+a.reversefootnote {
+	border-bottom: none;
+	margin-left: 6px;
+}
+
 a.media-link:hover {
 	border-bottom: 1px dotted #333;
 }
@@ -45,9 +50,25 @@ p {
 	margin-bottom: 24px;
 }
 
+.footnotes {
+	margin-top: 24px;
+	border-top: 1px dotted #ccc;
+	font-size: 14px;
+	padding-top: 24px;
+}
+
+ol {
+	padding: 0;
+	padding-left: 18px;
+}
+
 @media (max-width: 991px) {
 	body {
 		font-size: 16px;
+	}
+
+	.footnotes {
+		font-size: 12px;
 	}
 
 	a.media-link {
@@ -64,6 +85,7 @@ p {
 ul.interest-list > li {
 	margin-bottom: 6px;
 }
+
 
 #footer {
 	border-top: 1px dotted #333;
