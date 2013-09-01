@@ -3,11 +3,24 @@ body {
    font-size: 18px;
 }
 
-h1 {
+h1, h2, h3 {
 	font-family: cubano, sans-serif;
-	font-size: 64px;
 	border-bottom: none;
 	color: #333;
+}
+
+h1 {
+	font-size: 64px;
+}
+
+h2 {
+	font-size: 32px;
+	margin: 0;
+}
+
+h3 {
+	font-size: 24px;
+	margin: 18px 0;
 }
 
 .page-header {
@@ -17,6 +30,11 @@ h1 {
 a:hover {
 	color: #363636;
 	text-decoration: none;
+}
+
+.content {
+	padding-top: 24px;
+	border-top: 1px dotted #ccc;
 }
 
 a {
@@ -79,6 +97,12 @@ ol {
 	}
 	h1 {
 		font-size: 48px;
+	}
+	h2 {
+		font-size: 24px;
+	}
+	h3 {
+		font-size: 20px;
 	}
 }
 
