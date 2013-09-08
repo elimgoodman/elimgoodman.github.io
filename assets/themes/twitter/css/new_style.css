@@ -118,3 +118,11 @@ ul.interest-list > li {
 	padding-top: 12px;
 	font-size: 12px;
 }
+
+.idea-list {
+    margin-top: 24px;
+}
+
+.idea-list li {
+	margin: 12px 0;
+}

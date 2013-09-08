@@ -167,3 +167,8 @@ h1 {
 #dream-project ul > li{
     margin-bottom: 6px;
 }
+
+.idea-list {
+    margin-top: 24px;
+    list-style: dotted;
+}
