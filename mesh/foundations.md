@@ -30,6 +30,9 @@ Let's start off by asking a big, crazy question: what is a computer program? In 
 
 As an example, let's add a new function to our empty project. Also, keep in mind that we'll be doing things the hard way while we're still explaining these ideas - it would be crazy to actually program like this all the time!
 
+![](/assets/mocks/output.png)
+![](/assets/mocks/output2.png)
+![](/assets/mocks/output3.png)
 
 ```
  	($cursor.currentPackage).(addRegion! {{Fn}})
@@ -48,7 +51,7 @@ Motions like these are how all programming happens in Mesh, though not usually f
 	($cursor.currentRegion)
 		.(addStatementAt!
 			:idx => ($cursor.getCurrentStatementIdx),
-			:statement => {{Statement :type => StatementTypes.Define, :data => {:symbol => "...", :expr => "..."} }})
+			\:statement => \{\{Statement :type => StatementTypes.Define, :data => {:symbol => "...", :expr => "..."} }})
 ```
 So, yeah, we're not gonna be doing too much of that. Instead, we bind common motions to keys. So, to perform that same motion, we simply hit "o", like in vim. Mesh than needs a bit more information to complete the motion, so it prompts us for it. Much easier!
 
