@@ -100,6 +100,44 @@ We're creating an extension from a string, just like we did above with the state
 Now we need to actually create a Runner. We'll type this into the command bar:
 
 ```
-	
+	def runner {{Runner :fn fn}}
+	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! runner)
 ```
 
+And look at that! We see a Runner in our project, with it's function set to our "main" function. Now we can use it to actually run our code:
+
+```
+	(runner.run)
+```
+
+And the right thing came out! Yay!
+
+However, this isn't too much of an improvement. After all, why have that runner region sitting there on our screen? We can't really interact with it meaningfully, except to change the function that it runs. Let's make the UI of that element a little more helpful. 
+
+All extensions have a user-editable UI that they present in the project view. Let's make our runner display the output of its last run right in the region. To do that, we need to do two things - 1) alter the Runner extension to store the state of stdout after it's been run, and 2) update the UI of the extension to display that information. Let's add that field first (and again - don't worry too much about syntax):
+
+```
+	def field_type (Type.fromString "&String")
+	def empty_string #(return "")
+	(extension.addField! :name "result" :type type :transitionWith empty_string)
+```
+
+Now our existing Runner now has a "result" field. We can see that it's currently set to the empty string (which is what that 
+```:transitionWith empty_string``` business is about):
+
+```
+	extension.result
+```
+
+
+
+
+Then let's update the UI:
+
+```
+	def ui_string """
+		label(this.)
+	"""
+	
+	def ui (UI.fromString ui_string)
+```
