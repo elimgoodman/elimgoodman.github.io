@@ -29,8 +29,16 @@ Let's start off by asking a big, crazy question: what is a computer program? In 
 
 As an example, let's add a new function to our empty project. Also, keep in mind that we'll be doing things the hard way while we're still explaining these ideas - it would be crazy to actually program like this all the time!
 
+Here's an empty project - not very exciting, is it?
+
 ![](/assets/mocks/output.png)
+
+Let's open the command bar by hitting ":". Don't worry too much about the syntax of the command for right now:
+
 ![](/assets/mocks/output2.png)
+
+And voila! Our new function appears:
+
 ![](/assets/mocks/output3.png)
 
 ```
