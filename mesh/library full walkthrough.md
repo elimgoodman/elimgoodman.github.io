@@ -21,7 +21,7 @@ The first thing we're gonna want to do is create a function that gets run when o
 Next, we're going to type this command into the command bar:
 
 ```
-	(cursor.currentPerspective).(currentPackage).(addRegion! {{Fn}})
+	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! {{Fn}})
 ```
 
 And voila! A blank function appears!
@@ -39,14 +39,8 @@ Let's now add a statement to our function. Remember, we're doing this the hard w
 Next, we'll bring back up the command bar and enter this:
 
 ```
-	def fn (cursor.currentRegion):Fn
+	def fn (cursor.getCurrentRegion):Fn
 	(fn.setName! "main")
-```
-
-We see that we've changed the name of our function. Next, let's designate our function as main:
-
-```
-	(fn.setAsMain!)
 ```
 
 Note a few things here. First, we didn't have to create the symbol "fn" again - the command bar persists objects for you, just like a REPL would. Second, you can see that we're operating on that function just like we would operate on an object with a traditional OO language - we're using predefined methods to alter its internal state. This is how *all* manipulations to your program take place in Mesh. It might seem cumbersome at first, but with a combination of hotkeys and practice, we've found that one actually becomes faster by using motions instead of text. Additionally, manipulating the program this way allows us to leverage the full power and expressivity of the Mesh language, while also maintaining the type and state safety guarantees that the languages provides us. What this adds up to is the ability to make changes to your program quickly, safely, and ambitiously. Mesh allows you to boldly refactor where you may have not dared before. 
@@ -56,7 +50,7 @@ Note a few things here. First, we didn't have to create the symbol "fn" again - 
 We're now ready to add our first statement to our program. We'll bring up the command bar again and type this in:
 
 ```
-	def stmt (Statement.fromString "perform (print \"hello world\")")
+	def stmt (Statement.fromString "log (print \"hello world\")")
 	(fn.statements.append! stmt)
 ```
 
@@ -66,5 +60,46 @@ Ah, that "fromString" method looks convenient - we didn't have to create all of 
 
 I'd also like to say that we won't be devoting a lot of space here to Mesh's syntax. Mesh is not very novel in that respect, and we'd much rather show you the cool stuff.
 
-We should now be able to see our one statement in
+We should now be able to see our one statement in our function. That having been done, let's run the sucker. While we could always run our program using the "mesh" command-line utility, that wouldn't be any fun (and plus, Mesh offers some other really cool ways to do it). We're gonna take the really long way around on this one, but bear with us. This is where the magic happens. 
+
+We're gonna start out by just running our program via the command bar:
+
+```
+	ref stdout ""
+	def context {{ExecutionContext :stdout stdout}}
+	loop fn.statements statement
+		statement.exec! context
+	context.stdout
+```
+
+^^The reason it wouldn't work is that (print) has nowhere to go. What happens with blocking IO? What happens when you exec "perform (getLine)!" Maybe the object you pass it needs to conform to a certain specification. ie, getLine needs a context that understands how to read from stdio. However, we could mock up a context that also just mocks up those inlets and outlets. VMs need to know at compile time which inlets and outlets are needed from. We could compute all of the inlets and outlets needed by the whole program, and then require that any statement that's executed fulfill all of those inlets and outlets. That feels sloppy - maybe could do it at the package level?
+
+Don't worry too much about that ExecutionContext stuff. What's important is that we can see there that context.stdout is equal to "Hello world". We did it!
+
+However, that was pretty involved. What we're going to want to do is create an object that can do the running of the program for us. One thing that we haven't talked about is that not only is the *program* just a collection of Mesh objects, but the *environment* is also just comprised of instances of Mesh objects. We're going to exploit this fact to extend the editor with a new kind of object. Objects that only exist in the environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
+
+```
+	def extension_string = """
+		Extension Runner:
+			fn : Fn
+			run():String ->
+					ref stdout ""
+					def context {{ExecutionContext :stdout stdout}}
+					loop this.fn.statements statement
+						statement.exec! context
+					return context.stdout
+						
+	"""
+	
+	def extension = (Extension.fromString extension_string)
+	(editor.extensions.add! extension)
+```
+
+We're creating an extension from a string, just like we did above with the statement. What that syntax specifies is that we're making a new extension (named Runner), and that instances of the Runner extension will need to take an instance of a Fn. Runner extension instances will also have a method called "run" which takes no parameters, and returns a String. At the end, we're adding the extension object to the editor's set of extensions. 
+
+Now we need to actually create a Runner. We'll type this into the command bar:
+
+```
+	
+```
 
