@@ -1,3 +1,9 @@
+---
+layout: page
+title: Mesh - Foundations
+---
+{% include JB/setup %}
+
 TODO:
 
 * Language foundation at the beginning
@@ -31,7 +37,7 @@ The first thing we're gonna want to do is create a function that gets run when o
 Next, we're going to type this command into the command bar:
 
 ```
-	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! {{Fn}})
+	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! \{\{Fn}})
 ```
 
 And voila! A blank function appears!
@@ -76,7 +82,7 @@ We're gonna start out by just running our program via the command bar:
 
 ```
 	ref stdout ""
-	def vm {{VM :stdout stdout}}
+	def vm \{\{VM :stdout stdout}}
 	loop fn.statements statement
 		(vm.executeStatement! statement)
 	vm.stdout
@@ -94,7 +100,7 @@ However, that was pretty involved. What we're going to want to do is create an o
 			fn : Fn
 			run():String ->
 					ref stdout ""
-					def vm {{VM :stdout stdout}}
+					def vm \{\{VM :stdout stdout}}
 					loop this.fn.statements statement
 						statement.exec! vm
 					return context.stdout
@@ -110,7 +116,7 @@ We're creating an extension from a string, just like we did above with the state
 Now we need to actually create a Runner. We'll type this into the command bar:
 
 ```
-	def runner {{Runner :fn fn}}
+	def runner \{\{Runner :fn fn}}
 	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! runner)
 ```
 
@@ -149,7 +155,7 @@ Next, let's update the method:
 ```
 	def block_string """
 		ref stdout ""
-		def vm {{VM :stdout stdout}}
+		def vm \{\{VM :stdout stdout}}
 		loop this.fn.statements statement
 			statement.exec! vm
 		alter this.result context.stdout
@@ -166,9 +172,9 @@ Then let's update the UI:
 
 ```
 	def panel_string """	
-		{{Row
-			{{StaticLabel "Result:"}}
-			{{DynamicLabel this.result}}
+		\{\{Row
+			\{\{StaticLabel "Result:"}}
+			\{\{DynamicLabel this.result}}
 		}}		
 	"""
 	
