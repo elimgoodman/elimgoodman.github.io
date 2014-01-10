@@ -37,7 +37,7 @@ The first thing we're gonna want to do is create a function that gets run when o
 Next, we're going to type this command into the command bar:
 
 ``` perl
-	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! \{\{Fn}})
+	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! \{	{Fn}})
 ```
 
 And voila! A blank function appears!
@@ -92,7 +92,7 @@ We're gonna start out by just running our program via the command bar:
 
 Don't worry too much about that VM stuff. What's important is that we can see there that context.stdout is equal to "Hello world". We did it!
 
-However, that was pretty involved. What we're going to want to do is create an object that can do the running of the program for us. One thing that we haven't talked about is that not only is the *program* just a collection of Mesh objects, but the *environment* is also just comprised of instances of Mesh objects. We're going to exploit this fact to extend the editor with a new kind of object. Objects that only exist in the environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
+However, that was pretty involved. What we're going to want to do is create an object that can do the running of the program for us. One thing that we haven't talked about is that not only is the *program* just a collection of Mesh objects, but the *editing environment* is also just comprised of instances of Mesh objects. We're going to exploit this fact to extend the editor with a new kind of object. Objects that only exist in the editing environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
 
 ```
 	def extension_string = """
@@ -102,7 +102,7 @@ However, that was pretty involved. What we're going to want to do is create an o
 					ref stdout ""
 					def vm \{\{VM :stdout stdout}}
 					loop this.fn.statements statement
-						statement.exec! vm
+						(vm.executeStatement! statement)
 					return context.stdout
 						
 	"""
@@ -212,7 +212,7 @@ Nice! But let's say we want to take this one step further - let's have Mesh re-r
 	(editor.triggers.add! trigger)
 ```
 
-(Note for the curious: that business with ```:vm (editor.command_bar.getVM)``` is what allows us to refer to the symbols 'fn' and 'runner' in our trigger definition. If explicitly passed a context, the deserializer will use it to perform symbol lookups. This is a property of all deserializers, not just the one for Trigger.)
+(Note for the curious: that business with ```:vm (editor.command_bar.getVM)``` is what allows us to refer to the symbols 'fn' and 'runner' in our trigger definition. If explicitly passed a VM instance, the deserializer will use it to perform symbol lookups. This is a property of all deserializers, not just the one for Trigger.)
 
 Now, let's alter our function:
 
@@ -246,7 +246,7 @@ Fn main():None:
 
 If we enter ```(runner.run)```, we'll see that the incorrect thing is shown. While this is a contrived example, we're going to use this as an opportunity to build ourselves a custom debugger. As usual, we'll be taking the very long way around.
 
-To do this, we need to explore what's happening behind the scenes when Mesh code is executed. As you may have seen above, we rely on a new kind of Mesh object to execute code: a **VM**. Just as the Mesh *program* is represented as a Mesh object, and the Mesh *editor* is a Mesh object, so too is the VM that the program runs on represented as a Mesh object. 
+To do this, we need to explore what's happening behind the scenes when Mesh code is executed. As you may have seen above, we rely on a special kind of Mesh object to execute code: a **VM**. Just as the Mesh *program* is represented as a Mesh object, and the Mesh *editor* is a Mesh object, so too is the VM that the program runs on represented as a Mesh object. 
 
 You can think of a VM as a little abstract computer - it has some internal state and some connections to the outside world. Regular computers are connected to all sorts of IO devices - screens, keyboards, network connections, and so on. In Mesh, we represent these though another idea, called **channels**.  
 
@@ -263,7 +263,7 @@ As mentioned, Mesh VMs record some internal state, just as a normal computer mig
 * Some space that's used to pass back return values from functions
 //* The input and output channels that the VM can take advantage of to interact with the outside world
 
-OK, So we're keeping track of the above state, and we have a set of input and output channels we can take advantage of to perform IO. The Mesh VM needs the program to be described as a set of discrete operations that take place over the above elements - either on one of the pieces of internal state, or on a channel. Many valid Mesh statements are actually a composite of operations. For example, the "return" statement both sets the piece of memory that's used to ferry return values around, and also jumps the instruction pointer back to the call site. So, we need a more basic, VM-friendly way of representing our program. 
+OK, So we're keeping track of the above state, and we have a set of input and output channels we can take advantage of to perform IO. The Mesh VM needs the program to be described as a set of discrete operations that take place over the above elements - either on one of the pieces of internal state, or on a channel. Many valid Mesh statements are actually a composite of a few of these discrete operations. For example, the "return" statement both sets the piece of memory that's used to ferry return values around, and also jumps the instruction pointer back to the call site. So, we need a more basic, VM-friendly way of representing our program. 
 
 Luckily, Mesh makes transforming a program into a VM-friendly format super easy. As an example, let's click on our return statement in ```addTwo```. Let's bring that statement into scope:
 
@@ -274,10 +274,10 @@ Luckily, Mesh makes transforming a program into a VM-friendly format super easy.
 Now watch:
 
 ```
-	(stmt.compile) -> [Instructions.SetReturnValue, Instructions.PopLocationAndJump]
+	(stmt.getInstructions) -> [Instructions.SetReturnValue, Instructions.PopLocationAndJump]
 ```
 
-Lookit that! It turns out that every statement has a method called ```compile```, which returns a list of **instructions**. Instructions are transformations that can be run on a VM to affect some change to its internal state or IO channels. The Mesh VM needs this idea of instructions to more accurately represent where the program is "at" at any particular moment in time. For example, consider this Mesh statement:
+Lookit that! It turns out that every statement has a method called ```getInstructions```, which returns a list of **instructions**. Instructions are transformations that can be run on a VM to affect some change to its internal state or IO channels. The Mesh VM needs this idea of instructions to more accurately represent where the program is "at" at any particular moment in time. For example, consider this Mesh statement:
 
 ```
 	match (someFn a b)
@@ -287,7 +287,7 @@ Lookit that! It turns out that every statement has a method called ```compile```
 
 When we execute the whole statement, a number of things occur - we evaluate the call to ```someFn```, we pass the result into the cases, then the body of the correct case executes. To say that we're "on" that particular statement isn't accurate enough. Luckily, instructions are accurate enough for us - and they're built right in.
 
-As you might expect, instructions are *also* represented as regular Mesh objects. We can create them independently, manipulate them programatiicaly, and so on. If we wanted to, we could create arbitrary instructions in our REPL, and then run those on arbitrary VMs in order to get them into some desired state. We could also just alter the internal state of any VM to be what we needed it to be. Even better, if we get a VM into a state that's useful, we can spawn copies from it to use during future runs of our program. Having VMs and instructions represented as regular Mesh objects is powerful, useful, and safe.
+This might sound like a broken record at this point, but instructions themselves are *also* represented as regular Mesh objects. We can create them independently, manipulate them programmatically, and so on. If we wanted to, we could create arbitrary instructions in our REPL, and then run those on arbitrary VMs in order to get them into some desired state. We could also just alter the internal state of any VM to be what we needed it to be. Even better, if we get a VM into a state that's useful, we can spawn copies from it to use during future runs of our program. Having VMs and instructions represented as regular Mesh objects is powerful and useful (and again, we get that delicious, delicious type and state safety for free).
 
 OK, so after that epic detour, let's come back to our task: to build some kind of debugging mechanism for our program. Let's say that we want to see all of the symbols that are in scope at that ```return``` statement in ```addTwo``` - this should help us track down the bug. To do this, we're going to change our runner in the following ways:
 
