@@ -36,7 +36,7 @@ The first thing we're gonna want to do is create a function that gets run when o
 
 Next, we're going to type this command into the command bar:
 
-```
+``` perl
 	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! \{\{Fn}})
 ```
 
@@ -46,7 +46,7 @@ And voila! A blank function appears!
 
 What just happened back there? Well, let's think of how we would describe what we just did. In a traditional programming language, the act of "creating a function" starts when the first letter of the function definition block is typed, and ends when the last letter is typed. In Mesh, the function is added in one fell swoop, all at once. We call these changes to our program **motions**. 
 
-Motions are extremely powerful. While the actual syntax of the command isn't important right now, what you should note about it is that is simply a Mesh statement like any other, manipulating Mesh objects like any others. In other words, the *program we're building* is represented as an object in our system, and we can manipulate it with a set vocabulary of discrete transformations.
+Motions are extremely powerful. While the actual syntax of the command isn't important right now, what you should note about it is that is simply a Mesh statement like any other, manipulating Mesh objects like any others. In other words, the *program we're building* is represented as an object in our system, and we can manipulate it with a vocabulary of discrete transformations.
 
 Let's now add a statement to our function. Remember, we're doing this the hard way first. Let's click on our function to give it focus:
 
