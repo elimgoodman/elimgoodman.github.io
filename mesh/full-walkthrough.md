@@ -115,7 +115,7 @@ def runner \{\{Runner :fn fn}}
 
 And we hit enter:
 
-
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/runner_created.png)
 
 And look at that! We see a Runner in our project, with its function set to our "main" function. Now we can use it to actually run our code:
 
