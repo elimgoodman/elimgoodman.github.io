@@ -83,37 +83,41 @@ Let's start out by just running our program via the command bar:
 
 Don't worry too much about that VM stuff. What's important is that we can see there that ```vm.stdout``` is equal to "hello world". We did it!
 
-However, that was pretty involved. We don't want to type all of that code into the command bar every time we want to run out program. Instead, we're going to create an object that can do the running of the program for us. 
+However, that was pretty involved. It would be super annoying if we had to type all of that code into the command bar every time we wanted to run our program. Instead, let's create an object that can do the running of the program for us. 
 
-One thing that we haven't talked about is that not only is the *program* just a collection of Mesh objects, but the *editing environment* is also just comprised of instances of Mesh objects. We're going to exploit this fact to extend the editor with a new kind of object. Objects that only exist in the editing environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
+One thing that we haven't talked about is that not only is the *program* just a collection of Mesh objects, but the *editing environment* is also just comprised of instances of Mesh objects. We're going to take advantage of this fact to extend the editor with a new kind of interface element. Objects that only exist in the editing environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
 
-```
-	def extension_string = """
-		Extension Runner:
-			fn : Fn
-			run():String ->
-					ref stdout ""
-					def vm \{\{VM :stdout stdout}}
-					loop this.fn.statements statement
-						(vm.executeStatement! statement)
-					return context.stdout
-						
-	"""
-	
-	def extension = (Extension.fromString extension_string)
-	(editor.extensions.add! extension)
-```
+```clojure
+def extension_string """
+	Extension Runner:
+		fn : Fn
+		run():String ->
+				ref stdout ""
+				def vm \{\{VM :stdout stdout}}
+				loop this.fn.statements statement
+					(vm.executeStatement! statement)
+				return context.stdout
+					
+"""
 
-We're creating an extension from a string, just like we did above with the statement. What that syntax specifies is that we're making a new extension (named Runner), and that instances of the Runner extension will need to take an instance of a Fn. Runner extension instances will also have a method called "run" which takes no parameters, and returns a String. At the end, we're adding the extension object to the editor's set of extensions. 
-
-Now we need to actually create a Runner. We'll type this into the command bar:
-
-```
-	def runner \{\{Runner :fn fn}}
-	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! runner)
+def extension = (Extension.fromString extension_string)
+(editor.extensions.add! extension)
 ```
 
-And look at that! We see a Runner in our project, with it's function set to our "main" function. Now we can use it to actually run our code:
+We're creating an extension from a string, just like we did above with the statement. What that syntax specifies is that we're making a new extension (named Runner), and instances of the Runner extension will need to be provided with a function in our program. Runner extension instances will also have a method called "run" which takes no parameters, and returns a String. At the end of that snippet, we're adding the extension object to the editor's set of extensions. 
+
+Now that the editor knows how to make Runner objects, so let's actually make one. We'll type this into the command bar:
+
+```clojure
+def runner \{\{Runner :fn fn}}
+(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! runner)
+```
+
+And we hit enter:
+
+
+
+And look at that! We see a Runner in our project, with its function set to our "main" function. Now we can use it to actually run our code:
 
 ```
 	(runner.run)
