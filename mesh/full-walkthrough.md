@@ -81,9 +81,11 @@ Let's start out by just running our program via the command bar:
 
 ![image](http://elimgoodman.com/assets/mocks/output/walkthrough/running_program.png)
 
-Don't worry too much about that VM stuff. What's important is that we can see there that ```vm.stdout``` is equal to "Hello world". We did it!
+Don't worry too much about that VM stuff. What's important is that we can see there that ```vm.stdout``` is equal to "hello world". We did it!
 
-However, that was pretty involved. What we're going to want to do is create an object that can do the running of the program for us. One thing that we haven't talked about is that not only is the *program* just a collection of Mesh objects, but the *editing environment* is also just comprised of instances of Mesh objects. We're going to exploit this fact to extend the editor with a new kind of object. Objects that only exist in the editing environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
+However, that was pretty involved. We don't want to type all of that code into the command bar every time we want to run out program. Instead, we're going to create an object that can do the running of the program for us. 
+
+One thing that we haven't talked about is that not only is the *program* just a collection of Mesh objects, but the *editing environment* is also just comprised of instances of Mesh objects. We're going to exploit this fact to extend the editor with a new kind of object. Objects that only exist in the editing environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
 
 ```
 	def extension_string = """
