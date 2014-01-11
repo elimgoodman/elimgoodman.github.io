@@ -59,7 +59,7 @@ And we see that the name of our function has been changed:
 
 Note a few things here. First, we didn't have to create the symbol "fn" again - the command bar persists objects for you, just like a REPL would. Second, you can see that we're operating on our function region just like we would operate on an object with a traditional OO language - we're using predefined methods to alter its internal state. This is how *all* manipulations to your program take place in Mesh. It might seem cumbersome at first, but with a combination of hotkeys and practice, we've found that one actually becomes faster by using motions instead of text. Additionally, manipulating the program this way allows us to leverage the full power and expressivity of the Mesh language, while also maintaining the type and state safety guarantees that the languages provides us. What this adds up to is the ability to make changes to your program quickly, safely, and ambitiously. Mesh allows you to boldly refactor where you may have not dared before. 
 
-###We're Gonna Add a Statement; Don't Freak Out
+###Adding a Statement
 
 We're now ready to add our first statement to our program. We'll bring up the command bar again and type this in:
 
@@ -69,27 +69,27 @@ def stmt (Statement.fromString "log (print \"hello world\")")
 ```
 After we hit enter, we see that our function now contains a new statement:
 
-[picture:fn_with_statement]
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/fn_with_statement.png)
 
-Ah, that "fromString" method looks convenient - we didn't have to create all of the underlying objects that that statement requires (such as expressions and literals). Something important to note here is that, while the Mesh program is manipulable like an object while you're editing it, it is stored on disk as text. This means that you can continue to use text-based utilities with your program, such as git and grep. This also means that we can do what we did above - serialize and deserialize Mesh objects easily. 
+Ah, that "fromString" method was convenient; using it meant that we didn't have to create all of the underlying objects that that statement requires (such as expressions and literals). All Mesh objects serialize and deserialize easily.
 
-I'd also like to say that we won't be devoting a lot of space here to Mesh's syntax. Mesh is not very novel in that respect, and we'd much rather show you the cool stuff.
+###Running Our Program
 
-We should now be able to see our one statement in our function. That having been done, let's run the sucker. While we could always run our program using the "mesh" command-line utility, that wouldn't be any fun (and plus, Mesh offers some other really cool ways to do it). We're gonna take the really long way around on this one, but bear with us. This is where the magic happens. 
+We're gonna take the really long way around on this one, but bear with us. This is where the magic happens. 
 
-We're gonna start out by just running our program via the command bar:
+Let's start out by just running our program via the command bar:
 
+[picture:running_program.png]
+
+```clojure
+ref stdout ""
+def vm \{\{VM :stdout stdout}}
+loop fn.statements statement
+	(vm.executeStatement! statement)
+vm.stdout
 ```
-	ref stdout ""
-	def vm \{\{VM :stdout stdout}}
-	loop fn.statements statement
-		(vm.executeStatement! statement)
-	vm.stdout
-```
 
-^^The reason it wouldn't work is that (print) has nowhere to go. What happens with blocking IO? What happens when you exec "perform (getLine)!" Maybe the object you pass it needs to conform to a certain specification. ie, getLine needs a context that understands how to read from stdio. However, we could mock up a context that also just mocks up those inlets and outlets. VMs need to know at compile time which inlets and outlets are needed from. We could compute all of the inlets and outlets needed by the whole program, and then require that any statement that's executed fulfill all of those inlets and outlets. That feels sloppy - maybe could do it at the package level?
-
-Don't worry too much about that VM stuff. What's important is that we can see there that context.stdout is equal to "Hello world". We did it!
+Don't worry too much about that VM stuff. What's important is that we can see there that ```vm.stdout``` is equal to "Hello world". We did it!
 
 However, that was pretty involved. What we're going to want to do is create an object that can do the running of the program for us. One thing that we haven't talked about is that not only is the *program* just a collection of Mesh objects, but the *editing environment* is also just comprised of instances of Mesh objects. We're going to exploit this fact to extend the editor with a new kind of object. Objects that only exist in the editing environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
 
@@ -305,3 +305,4 @@ We should see an empty scope viewer appear on the screen:
 [picture:empty_scope_viewer]
 
 Next, we need to modify our runner to set that scope viewer's content when it encounters a specific instruction. 
+]
