@@ -119,9 +119,7 @@ And we hit enter:
 
 And look at that! We see a Runner in our project, with its function set to our "main" function. Now we can use it to actually run our code:
 
-```
-	(runner.run)
-```
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/runner_from_command_bar.png)
 
 And the right thing came out! Yay!
 
