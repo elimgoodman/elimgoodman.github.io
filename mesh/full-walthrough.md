@@ -14,31 +14,19 @@ TODO:
 * I think I may have to simplify/change the language to make it easier to write a debugger - either more like Lisp, or more like assembly
 	* 	God, maybe there's some assembly-like sub-language that everything gets compiled into, and is also represented as Mesh objects, and the debugger taps into that layer
 
-OK - I should present both the concepts involved by using a story. Go from small to big - everyday to more complex. That's how usage of the program will progress (from small company to large company).
+As our very first task, let's start with the basics: printing "Hello world" to the screen. Note that we're gonna be doing things the hard way at first, to give you a better idea of how Mesh works. 
 
-The application we're going to create is run from the command line. It's going to help us keep track of our personal library. The program will present a prompt, and will respond to the following commands:
+When we open Mesh, we're shown a new, blank project: 
 
-- add "$title" "$author"
-- show all
-- show by "$author"
-- read "$title"
-- quit
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/blank_project.png)
 
-Let's open a new Mesh project. 
-
-[picture:blank_project]
-
-As our very first task, let's write a function that we can run that just takes input from the user and prints it right back out. Note that we're gonna be doing things the hard way at first, to give you a better idea of how Mesh works. Most of things that seem extremely tedious can be assigned to hotkeys. 
-
-The first thing we're gonna want to do is create a function that gets run when our program gets run - the equivalent of ```main()``` in C. To do that, we're going to want to bring up the **command bar** by hitting ":". (You can think of the command bar as a REPL with special powers. Not only can you evaluate arbitrary Mesh statements, the command bar allows you to make programmatic changes to the program you're building).
+The first thing we're gonna want to do is create a function to house our instruction to print "Hello World." To do that, we're going to want to bring up the **command bar** by hitting ":". You can think of the command bar as a really powerful REPL:
 
 ![image](http://elimgoodman.com/assets/mocks/output/walkthrough/command_bar_open.png)
 
-Next, we're going to type this command into the command bar:
+Next, we're going to enter a command into the command bar (don't worry about the syntax for now):
 
-```
-	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! \{\{Fn}})
-```
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/new_fn_command.png)
 
 And voila! A blank function appears!
 
