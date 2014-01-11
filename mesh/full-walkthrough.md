@@ -16,6 +16,10 @@ TODO:
 
 As our very first task, let's start with the basics: printing "Hello world" to the screen. Note that we're gonna be doing things the hard way at first, to give you a better idea of how Mesh works. 
 
+#Startin' Real Basic
+
+###Let's Make, like, just one function
+
 When we open Mesh, we're shown a new, blank project: 
 
 ![image](http://elimgoodman.com/assets/mocks/output/walkthrough/blank_project.png)
@@ -36,31 +40,34 @@ What just happened back there? Well, let's think of how we would describe what w
 
 Motions are extremely powerful. While the actual syntax of the command isn't important right now, what you should note about it is that is simply a Mesh statement like any other, manipulating Mesh objects like any others. In other words, the *program we're building* is represented as an object in our system, and we can manipulate it with a vocabulary of discrete transformations.
 
-Let's now add a statement to our function. Remember, we're doing this the hard way first. Let's click on our function to give it focus:
+###Changing Our Function's Name
+
+Let's now make a change to our function. Remember, we're doing this the hard way first. Let's click on our function to give it focus:
 
 ![image](http://elimgoodman.com/assets/mocks/output/walkthrough/fn_with_focus.png)
 
 Next, we'll bring back up the command bar and enter this:
 
-```
-	def fn (cursor.getCurrentRegion):Fn
-	(fn.setName! "main")
+```clojure
+def fn (cursor.getCurrentRegion):Fn
+(fn.setName! "main")
 ```
 
 And we see that the name of our function has been changed:
 
 ![image](http://elimgoodman.com/assets/mocks/output/walkthrough/name_changed_fn.png)
 
-Note a few things here. First, we didn't have to create the symbol "fn" again - the command bar persists objects for you, just like a REPL would. Second, you can see that we're operating on that function just like we would operate on an object with a traditional OO language - we're using predefined methods to alter its internal state. This is how *all* manipulations to your program take place in Mesh. It might seem cumbersome at first, but with a combination of hotkeys and practice, we've found that one actually becomes faster by using motions instead of text. Additionally, manipulating the program this way allows us to leverage the full power and expressivity of the Mesh language, while also maintaining the type and state safety guarantees that the languages provides us. What this adds up to is the ability to make changes to your program quickly, safely, and ambitiously. Mesh allows you to boldly refactor where you may have not dared before. 
+Note a few things here. First, we didn't have to create the symbol "fn" again - the command bar persists objects for you, just like a REPL would. Second, you can see that we're operating on our function region just like we would operate on an object with a traditional OO language - we're using predefined methods to alter its internal state. This is how *all* manipulations to your program take place in Mesh. It might seem cumbersome at first, but with a combination of hotkeys and practice, we've found that one actually becomes faster by using motions instead of text. Additionally, manipulating the program this way allows us to leverage the full power and expressivity of the Mesh language, while also maintaining the type and state safety guarantees that the languages provides us. What this adds up to is the ability to make changes to your program quickly, safely, and ambitiously. Mesh allows you to boldly refactor where you may have not dared before. 
 
------
+###We're Gonna Add a Statement; Don't Freak Out
 
 We're now ready to add our first statement to our program. We'll bring up the command bar again and type this in:
 
+```clojure
+def stmt (Statement.fromString "log (print \"hello world\")")
+(fn.statements.append! stmt)
 ```
-	def stmt (Statement.fromString "log (print \"hello world\")")
-	(fn.statements.append! stmt)
-```
+After we hit enter, we see that our function now contains a new statement:
 
 [picture:fn_with_statement]
 
