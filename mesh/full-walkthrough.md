@@ -79,15 +79,7 @@ We're gonna take the really long way around on this one, but bear with us. This 
 
 Let's start out by just running our program via the command bar:
 
-[picture:running_program.png]
-
-```clojure
-ref stdout ""
-def vm \{\{VM :stdout stdout}}
-loop fn.statements statement
-	(vm.executeStatement! statement)
-vm.stdout
-```
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/running_program.png)
 
 Don't worry too much about that VM stuff. What's important is that we can see there that ```vm.stdout``` is equal to "Hello world". We did it!
 
