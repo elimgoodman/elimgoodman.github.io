@@ -123,28 +123,25 @@ And look at that! We see a Runner in our project, with its function set to our "
 
 And the right thing came out! Yay!
 
-However, this isn't too much of an improvement. After all, why have that runner region sitting there on our screen? We can't really interact with it meaningfully, except to change the function that it runs. Let's make the UI of that element a little more helpful. 
+However, this isn't too much of an improvement. After all, why have that Runner region sitting there on our screen? We can't really interact with it meaningfully, except to change the function that it runs. Let's make the UI of that element a little more helpful. 
 
-All extensions have a user-editable UI that they present in the project view. Let's make our runner display the output of its last run right in the region. To do that, we need to do three things: 
+All extensions have a user-editable UI that they present in the project view. Let's make our Runner display the output of its last run right in the region. To do that, we need to do three things: 
 
 1. Alter the Runner extension to store the state of stdout after it's been run.
 2. Update the "run" method to update the result after running 
 3. Update the UI of the extension to display that information. 
 
-Let's add that field first (and again - don't worry too much about syntax):
+Let's add a field to the Runner extension to store the state of stdout:
 
-```
-	def field_type (Type.fromString "&String")
-	def empty_string #(return "")
-	(extension.addField! :name "result" :type type :transitionWith empty_string)
+```clojure
+def field_type (Type.fromString "&String")
+(extension.addField! :name "result" :type type)
 ```
 
-Now our existing Runner now has a "result" field. We can see that it's currently set to the empty string (which is what that 
-```:transitionWith empty_string``` business is about):
+Now our existing Runner instance now has a "result" field. We can see that it's currently set to the empty string:
 
-```
-	extension.result
-```
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/runner_with_result_command.png)
+
 Next, let's update the method:
 
 ```
