@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Mesh - Foundations
+title: Mesh - Full Walkthrough
 ---
 {% include JB/setup %}
 
@@ -32,12 +32,12 @@ As our very first task, let's write a function that we can run that just takes i
 
 The first thing we're gonna want to do is create a function that gets run when our program gets run - the equivalent of ```main()``` in C. To do that, we're going to want to bring up the **command bar** by hitting ":". (You can think of the command bar as a REPL with special powers. Not only can you evaluate arbitrary Mesh statements, the command bar allows you to make programmatic changes to the program you're building).
 
-[picture:command_bar_open_and_blank]
+![image](http://www.elimgoodman.com/assets/)
 
 Next, we're going to type this command into the command bar:
 
-``` perl
-	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! \{	{Fn}})
+```
+	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! \{\{Fn}})
 ```
 
 And voila! A blank function appears!
@@ -274,10 +274,10 @@ Luckily, Mesh makes transforming a program into a VM-friendly format super easy.
 Now watch:
 
 ```
-	(stmt.getInstructions) -> [Instructions.SetReturnValue, Instructions.PopLocationAndJump]
+	(stmt.toInstructions) -> [Instructions.SetReturnValue, Instructions.PopLocationAndJump]
 ```
 
-Lookit that! It turns out that every statement has a method called ```getInstructions```, which returns a list of **instructions**. Instructions are transformations that can be run on a VM to affect some change to its internal state or IO channels. The Mesh VM needs this idea of instructions to more accurately represent where the program is "at" at any particular moment in time. For example, consider this Mesh statement:
+Lookit that! It turns out that every statement has a method called ```toInstructions```, which returns a list of **instructions**. Instructions are commands that can be run on a VM to affect some change to its internal state or IO channels. The Mesh VM needs this idea of instructions to more accurately represent where the program is "at" at any particular moment in time. For example, consider this Mesh statement:
 
 ```
 	match (someFn a b)
@@ -287,12 +287,22 @@ Lookit that! It turns out that every statement has a method called ```getInstruc
 
 When we execute the whole statement, a number of things occur - we evaluate the call to ```someFn```, we pass the result into the cases, then the body of the correct case executes. To say that we're "on" that particular statement isn't accurate enough. Luckily, instructions are accurate enough for us - and they're built right in.
 
-This might sound like a broken record at this point, but instructions themselves are *also* represented as regular Mesh objects. We can create them independently, manipulate them programmatically, and so on. If we wanted to, we could create arbitrary instructions in our REPL, and then run those on arbitrary VMs in order to get them into some desired state. We could also just alter the internal state of any VM to be what we needed it to be. Even better, if we get a VM into a state that's useful, we can spawn copies from it to use during future runs of our program. Having VMs and instructions represented as regular Mesh objects is powerful and useful (and again, we get that delicious, delicious type and state safety for free).
+As you might expect, instructions themselves are *also* represented as regular Mesh objects. We can create them independently, manipulate them programmatically, and so on. If we wanted to, we could create arbitrary instructions in our REPL, and then run those on arbitrary VMs in order to get them into some desired state. We could also just alter the internal state of any VM to be what we needed it to be. Even better, if we get a VM into a state that's useful, we can spawn copies from it to use during future runs of our program. Having VMs and instructions represented as regular Mesh objects is powerful and useful (and again, we get that delicious, delicious type and state safety for free).
 
 OK, so after that epic detour, let's come back to our task: to build some kind of debugging mechanism for our program. Let's say that we want to see all of the symbols that are in scope at that ```return``` statement in ```addTwo``` - this should help us track down the bug. To do this, we're going to change our runner in the following ways:
 
-1. We want to create a new extension to display the contents of the execution context's scope.
-2. We want to display the symbols in scope at that point
-3. 
+1. We want to create a way to display the contents of a VM's scope.
+2. We want to have an instance of that extension display the VM's scope at the correct point in our program
 
+Instead of rolling our own mechanism to view the scope object, we're going to use Mesh's built-in ScopeViewer extension. Let's create one:
 
+```
+	def viewer \{\{ScopeViewer}}
+	(cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! viewer)
+```
+
+We should see an empty scope viewer appear on the screen:
+
+[picture:empty_scope_viewer]
+
+Next, we need to modify our runner to set that scope viewer's content when it encounters a specific instruction. 
