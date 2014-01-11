@@ -28,9 +28,9 @@ Next, we're going to enter a command into the command bar (don't worry about the
 
 ![image](http://elimgoodman.com/assets/mocks/output/walkthrough/new_fn_command.png)
 
-And voila! A blank function appears!
+Then we hit enter, and voila! A blank function appears!
 
-[picture:empty_fn]
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/blank_fn.png)
 
 What just happened back there? Well, let's think of how we would describe what we just did. In a traditional programming language, the act of "creating a function" starts when the first letter of the function definition block is typed, and ends when the last letter is typed. In Mesh, the function is added in one fell swoop, all at once. We call these changes to our program **motions**. 
 
