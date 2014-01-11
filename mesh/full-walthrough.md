@@ -32,7 +32,7 @@ As our very first task, let's write a function that we can run that just takes i
 
 The first thing we're gonna want to do is create a function that gets run when our program gets run - the equivalent of ```main()``` in C. To do that, we're going to want to bring up the **command bar** by hitting ":". (You can think of the command bar as a REPL with special powers. Not only can you evaluate arbitrary Mesh statements, the command bar allows you to make programmatic changes to the program you're building).
 
-![image](http://www.elimgoodman.com/assets/)
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/command_bar_open.png)
 
 Next, we're going to type this command into the command bar:
 
