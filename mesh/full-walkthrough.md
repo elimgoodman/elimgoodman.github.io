@@ -61,7 +61,7 @@ Note a few things here. First, we didn't have to create the symbol "fn" again - 
 
 ###Adding a Statement
 
-We're now ready to add our first statement to our program. We'll bring up the command bar again and type this in:
+We're now ready to add our first statement to our program. The statements in our program are just regular Mesh objects. To add one, we'll bring up the command bar again and type this in:
 
 ```clojure
 def stmt (Statement.fromString "log (print \"hello world\")")
