@@ -146,10 +146,11 @@ Now our existing Runner instance now has a "result" field. We can see that it's 
 
 Next, let's update the method:
 
-```clojure
+{% highlight clojure %}
+{% raw %}
 def block_string """
 	ref stdout ""
-	def vm \{\{VM :stdout stdout}}
+	def vm {{VM :stdout stdout}}
 	loop this.fn.statements statement
 		statement.exec! vm
 	alter this.result context.stdout
@@ -158,7 +159,9 @@ def block_string """
 
 def block (Block.fromString block_string :vm => (extension.getVM))
 (extension.run.setBlock! block)
-```
+{% endraw %}
+{% endhighlight %}
+
 Then let's update the UI:
 
 ```clojure
