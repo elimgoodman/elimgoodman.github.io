@@ -16,7 +16,7 @@ TODO:
 
 As our very first task, let's start with the basics: printing "Hello world" to the screen. Note that we're gonna be doing things the hard way at first, to give you a better idea of how Mesh works. 
 
-#Startin' Real Basic
+#Startin' Real Basic: Hello World
 
 ###Let's Make, like, just one function
 
@@ -83,7 +83,9 @@ Let's start out by just running our program via the command bar:
 
 Don't worry too much about that VM stuff. What's important is that we can see there that ```vm.stdout``` is equal to "hello world". We did it!
 
-However, that was pretty involved. It would be super annoying if we had to type all of that code into the command bar every time we wanted to run our program. Instead, let's create an object that can run our program for us. 
+#Let's Build Ourselves a Live Coding Environment
+
+So, we got our program to run, but it was pretty involved. It would be super annoying if we had to type all of that code into the command bar every time we wanted to run our program. Instead, let's create an object that can run our program for us. 
 
 One thing that we haven't talked about is that not only is the *program* just a collection of Mesh objects, but the *editing environment* is also just comprised of instances of Mesh objects. We're going to take advantage of this fact to extend the editor with a new kind of interface element. Objects that only exist in the editing environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
 
@@ -174,13 +176,9 @@ def panel (Panel.fromString panel_string)
 
 Tada! We now see that our Runner region has a much prettier label, and the result field is hidden:
 
-[picture:extension_ui_updated]
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/runner_new_ui.png)
 
 And now, running our runner again should make the result appear:
-
-```clojure
-(runner.run)
-```
 
 [picture:extension_with_result]
 
