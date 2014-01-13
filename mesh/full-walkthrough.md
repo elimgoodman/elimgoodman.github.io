@@ -180,33 +180,32 @@ Tada! We now see that our Runner region has a much prettier label, and the resul
 
 And now, running our runner again should make the result appear:
 
-[picture:extension_with_result]
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/runner_new_ui_result.png)
+
 
 Nice! But let's say we want to take this one step further - let's have Mesh re-run our Runner every time we alter that function. To do that, we're going to introduce another new idea: **triggers**. Triggers are just snippets of Mesh code that get run whenever certain motions occur. Let's make a new trigger to kick off our Runner when our function is changed:
 
-```
-	def trigger_string """
-		Trigger:
-			region: fn
-			motion: Editor.Motions.Any
-			action: #(
-				(runner.run)
-			)
-			
-	"""
-	
-	def trigger (Trigger.fromString trigger_string :vm (editor.command_bar.getVM))
-	(editor.triggers.add! trigger)
-```
+```clojure
+def trigger_string """
+	Trigger:
+		region: fn
+		motion: Editor.Motions.Any
+		action: #(
+			(runner.run)
+		)
+		
+"""
 
-(Note for the curious: that business with ```:vm (editor.command_bar.getVM)``` is what allows us to refer to the symbols 'fn' and 'runner' in our trigger definition. If explicitly passed a VM instance, the deserializer will use it to perform symbol lookups. This is a property of all deserializers, not just the one for Trigger.)
+def trigger (Trigger.fromString trigger_string :vm (editor.command_bar.getVM))
+(editor.triggers.add! trigger)
+```
 
 Now, let's alter our function:
 
-```
-	def new_expr (Expression.fromString "\"goodbye world\"")
-	def stmt (fn.statements.first):LogStatement
-	(stmt.setExpression! new_expr)
+```clojure
+def new_expr (Expression.fromString "\"goodbye world\"")
+def stmt (fn.statements.first):LogStatement
+(stmt.setExpression! new_expr)
 ```
 
 And there it is! As soon as we performed the ```setExpression!``` motion, our trigger fired, told the Runner to re-run itself, which caused it to set the result value on the Runner. And now we've got our own, custom-built "live coding" environment!
