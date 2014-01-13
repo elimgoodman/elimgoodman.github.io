@@ -22,19 +22,19 @@ As our very first task, let's start with the basics: printing "Hello world" to t
 
 When we open Mesh, we're shown a new, blank project: 
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/blank_project.png)
+![image](http://elimgoodman.com/assets/mocks/output/blank_project.gif)
 
 The first thing we're gonna want to do is create a function to house our instruction to print "Hello World." To do that, we're going to want to bring up the **command bar** by hitting ":". You can think of the command bar as a really powerful REPL:
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/command_bar_open.png)
+![image](http://elimgoodman.com/assets/mocks/output/command_bar_open.gif)
 
 Next, we're going to enter a command into the command bar (don't worry about the syntax for now):
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/new_fn_command.png)
+![image](http://elimgoodman.com/assets/mocks/output/new_fn_command.gif)
 
 Then we hit enter, and voila! A blank function appears!
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/blank_fn.png)
+![image](http://elimgoodman.com/assets/mocks/output/blank_fn.gif)
 
 What just happened back there? Well, let's think of how we would describe what we just did. In a traditional programming language, the act of "creating a function" starts when the first letter of the function definition block is typed, and ends when the last letter is typed. In Mesh, the function is added in one fell swoop, all at once. We call these changes to our program **motions**. 
 
@@ -44,7 +44,7 @@ Motions are extremely powerful. While the actual syntax of the command isn't imp
 
 Let's now make a change to our function. Remember, we're doing this the hard way first. Let's click on our function to give it focus:
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/fn_with_focus.png)
+![image](http://elimgoodman.com/assets/mocks/output/fn_with_focus.gif)
 
 Next, we'll bring back up the command bar and enter this:
 
@@ -55,7 +55,7 @@ def fn (cursor.getCurrentRegion):Fn
 
 And we see that the name of our function has been changed:
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/name_changed_fn.png)
+![image](http://elimgoodman.com/assets/mocks/output/name_changed_fn.gif)
 
 Note a few things here. First, we didn't have to create the symbol "fn" again - the command bar persists objects for you, just like a REPL would. Second, you can see that we're operating on our function region just like we would operate on an object with a traditional OO language - we're using predefined methods to alter its internal state. This is how *all* manipulations to your program take place in Mesh. It might seem cumbersome at first, but with a combination of hotkeys and practice, we've found that one actually becomes faster by using motions instead of text. Additionally, manipulating the program this way allows us to leverage the full power and expressivity of the Mesh language, while also maintaining the type and state safety guarantees that the languages provides us. What this adds up to is the ability to make changes to your program quickly, safely, and ambitiously. Mesh allows you to boldly refactor where you may have not dared before. 
 
@@ -69,7 +69,7 @@ def stmt (Statement.fromString "log (print \"hello world\")")
 ```
 After we hit enter, we see that our function now contains a new statement:
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/fn_with_statement.png)
+![image](http://elimgoodman.com/assets/mocks/output/fn_with_statement.gif)
 
 Ah, that "fromString" method was convenient; using it meant that we didn't have to create all of the underlying objects that that statement requires (such as expressions and literals). All Mesh objects serialize and deserialize easily.
 
@@ -79,7 +79,7 @@ We're gonna take the really long way around on this one, but bear with us. This 
 
 Let's start out by just running our program via the command bar:
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/running_program.png)
+![image](http://elimgoodman.com/assets/mocks/output/running_program.gif)
 
 Don't worry too much about that VM stuff. What's important is that we can see there that ```vm.stdout``` is equal to "hello world". We did it!
 
@@ -117,11 +117,11 @@ def runner \{\{Runner :fn fn}}
 
 And we hit enter:
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/runner_created.png)
+![image](http://elimgoodman.com/assets/mocks/output/runner_created.gif)
 
 And look at that! We see a Runner in our project, with its function set to our "main" function. Now we can use it to actually run our code:
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/runner_from_command_bar.png)
+![image](http://elimgoodman.com/assets/mocks/output/runner_from_command_bar.gif)
 
 And the right thing came out! Yay!
 
@@ -142,7 +142,7 @@ def field_type (Type.fromString "&String")
 
 Now our existing Runner instance now has a "result" field. We can see that it's currently set to the empty string:
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/runner_with_result_command.png)
+![image](http://elimgoodman.com/assets/mocks/output/runner_with_result_command.gif)
 
 Next, let's update the method:
 
@@ -176,11 +176,11 @@ def panel (Panel.fromString panel_string)
 
 Tada! We now see that our Runner region has a much prettier label, and the result field is hidden:
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/runner_new_ui.png)
+![image](http://elimgoodman.com/assets/mocks/output/runner_new_ui.gif)
 
 And now, running our runner again should make the result appear:
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/runner_new_ui_result.png)
+![image](http://elimgoodman.com/assets/mocks/output/runner_new_ui_result.gif)
 
 
 Nice! But let's say we want to take this one step further - let's have Mesh re-run our Runner every time we alter that function. To do that, we're going to introduce another new idea: **triggers**. Triggers are just snippets of Mesh code that get run whenever certain motions occur. Let's make a new trigger to kick off our Runner when our function is changed:
@@ -202,6 +202,6 @@ def trigger (Trigger.fromString trigger_string :vm (editor.command_bar.getVM))
 
 Now, let's alter our function:
 
-![image](http://elimgoodman.com/assets/mocks/output/walkthrough/trigger_run.png)
+![image](http://elimgoodman.com/assets/mocks/output/trigger_run.gif)
 
 And there it is! As soon as we performed the ```setExpression!``` motion, our trigger fired, told the Runner to re-run itself, which caused it to set the result value on the Runner. And now we've got our own, custom-built "live coding" environment!
