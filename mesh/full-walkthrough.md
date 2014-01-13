@@ -18,38 +18,25 @@ The first thing we're gonna want to do is create a function to house our instruc
 
 ![image](http://elimgoodman.com/assets/mocks/output/command_bar_open.gif)
 
-Next, we're going to enter a command into the command bar (don't worry about the syntax for now):
+Next, we're going to enter two commands into the command bar, hitting enter after each one (don't worry about the syntax for now):
 
 ![image](http://elimgoodman.com/assets/mocks/output/new_fn_command.gif)
 
-Then we hit enter, and voila! A blank function appears!
+And voila! A blank function appears!
 
-![image](http://elimgoodman.com/assets/mocks/output/blank_fn.gif)
+What just happened back there? Well, let's think of how we would describe what we just did. In a traditional programming language, the act of "creating a function" starts when the first letter of the function definition block is typed, and ends when the last letter is typed. In Mesh, the function is added in two fell swoop, all at once. We call these changes to our program **motions**. 
 
-What just happened back there? Well, let's think of how we would describe what we just did. In a traditional programming language, the act of "creating a function" starts when the first letter of the function definition block is typed, and ends when the last letter is typed. In Mesh, the function is added in one fell swoop, all at once. We call these changes to our program **motions**. 
-
-Motions are extremely powerful. While the actual syntax of the command isn't important right now, what you should note about it is that is simply a Mesh statement like any other, manipulating Mesh objects like any others. In other words, the *program we're building* is represented as an object in our system, and we can manipulate it with a vocabulary of discrete transformations.
+Motions are extremely powerful. While the actual syntax of the commands isn't important right now, what you should note about them is that they are simply Mesh statements like any other, manipulating Mesh objects like any others. In other words, the *program we're building* is represented as an object in our system, and we can manipulate it using the full power of the Mesh language.
 
 ###Changing Our Function's Name
 
-Let's now make a change to our function. Remember, we're doing this the hard way first. Let's click on our function to give it focus:
-
-![image](http://elimgoodman.com/assets/mocks/output/fn_with_focus.gif)
-
-Next, we'll bring back up the command bar and enter this:
-
-{% highlight clojure %}
-{% raw %}
-def fn (cursor.getCurrentRegion):Fn
-(fn.setName! "main")
-{% endraw %}
-{% endhighlight %}
-
-And we see that the name of our function has been changed:
+Let's now make a change to our function. Remember, we're doing this the hard way first. Let's bring back up the command bar and enter this command:
 
 ![image](http://elimgoodman.com/assets/mocks/output/name_changed_fn.gif)
 
-Note a few things here. First, we didn't have to create the symbol "fn" again - the command bar persists objects for you, just like a REPL would. Second, you can see that we're operating on our function region just like we would operate on an object with a traditional OO language - we're using predefined methods to alter its internal state. This is how *all* manipulations to your program take place in Mesh. It might seem cumbersome at first, but with a combination of hotkeys and practice, we've found that one actually becomes faster by using motions instead of text. Additionally, manipulating the program this way allows us to leverage the full power and expressivity of the Mesh language, while also maintaining the type and state safety guarantees that the languages provides us. What this adds up to is the ability to make changes to your program quickly, safely, and ambitiously. Mesh allows you to boldly refactor where you may have not dared before. 
+Note a few things here. First, we didn't have to create the symbol "fn" again - the command bar persists objects for you, just like a REPL would. Second, you can see that we're operating on our function region just like we would operate on an object with a traditional OO language - we're using predefined methods to alter its internal state. This is how *all* manipulations to your program take place in Mesh. It might seem cumbersome at first, but with a combination of hotkeys and practice, we've found that one actually becomes faster by using motions instead of text. 
+
+Additionally, manipulating the program this way allows us to leverage the full power and expressivity of the Mesh language, while also maintaining the type and state safety guarantees that the languages provides us. What this adds up to is the ability to make changes to your program quickly, safely, and ambitiously. Mesh allows you to boldly refactor where you may have not dared before. 
 
 ###Adding a Statement
 
