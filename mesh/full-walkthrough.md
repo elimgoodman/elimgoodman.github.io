@@ -100,7 +100,7 @@ def extension_string """
 					
 """
 
-def extension = (Extension.fromString extension_string)
+def extension (Extension.fromString extension_string)
 (editor.extensions.add! extension)
 ```
 
@@ -144,35 +144,32 @@ Now our existing Runner instance now has a "result" field. We can see that it's 
 
 Next, let's update the method:
 
-```
-	def block_string """
-		ref stdout ""
-		def vm \{\{VM :stdout stdout}}
-		loop this.fn.statements statement
-			statement.exec! vm
-		alter this.result context.stdout
-		return this.result
-	"""
-	
-	def block (Block.fromString block_string :vm => (extension.getVM))
-	(extension.run.setBlock! block)
-```
+```clojure
+def block_string """
+	ref stdout ""
+	def vm \{\{VM :stdout stdout}}
+	loop this.fn.statements statement
+		statement.exec! vm
+	alter this.result context.stdout
+	return this.result
+"""
 
-(Note for the curious: The reason we pass in that :vm variable is so that references to ```this.result``` evaluate correctly)
-
+def block (Block.fromString block_string :vm => (extension.getVM))
+(extension.run.setBlock! block)
+```
 Then let's update the UI:
 
-```
-	def panel_string """	
-		\{\{Row
-			\{\{StaticLabel "Result:"}}
-			\{\{DynamicLabel this.result}}
-		}}		
-	"""
-	
-	def panel (Panel.fromString panel_string)
-	(extension.ui.setPanel! panel)
-	(extension.ui.setFieldVisibility! :result False)
+```clojure
+def panel_string """	
+	\{\{Row
+		\{\{StaticLabel "Result:"}}
+		\{\{DynamicLabel this.result}}
+	}}		
+"""
+
+def panel (Panel.fromString panel_string)
+(extension.ui.setPanel! panel)
+(extension.ui.setFieldVisibility! :result False)
 ```
 
 Tada! We now see that our Runner region has a much prettier label, and the result field is hidden:
@@ -181,8 +178,8 @@ Tada! We now see that our Runner region has a much prettier label, and the resul
 
 And now, running our runner again should make the result appear:
 
-```
-	(runner.run)
+```clojure
+(runner.run)
 ```
 
 [picture:extension_with_result]
