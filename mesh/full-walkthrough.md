@@ -202,11 +202,7 @@ def trigger (Trigger.fromString trigger_string :vm (editor.command_bar.getVM))
 
 Now, let's alter our function:
 
-```clojure
-def new_expr (Expression.fromString "\"goodbye world\"")
-def stmt (fn.statements.first):LogStatement
-(stmt.setExpression! new_expr)
-```
+![image](http://elimgoodman.com/assets/mocks/output/walkthrough/trigger_run.png)
 
 And there it is! As soon as we performed the ```setExpression!``` motion, our trigger fired, told the Runner to re-run itself, which caused it to set the result value on the Runner. And now we've got our own, custom-built "live coding" environment!
 
