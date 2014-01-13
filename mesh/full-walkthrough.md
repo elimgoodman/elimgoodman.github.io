@@ -48,10 +48,12 @@ Let's now make a change to our function. Remember, we're doing this the hard way
 
 Next, we'll bring back up the command bar and enter this:
 
-```clojure
+{% highlight clojure %}
+{% raw %}
 def fn (cursor.getCurrentRegion):Fn
 (fn.setName! "main")
-```
+{% endraw %}
+{% endhighlight %}
 
 And we see that the name of our function has been changed:
 
@@ -63,10 +65,13 @@ Note a few things here. First, we didn't have to create the symbol "fn" again - 
 
 We're now ready to add our first statement to our program. The statements in our program are just regular Mesh objects. To add one, we'll bring up the command bar again and type this in:
 
-```clojure
+{% highlight clojure %}
+{% raw %}
 def stmt (Statement.fromString "log (print \"hello world\")")
 (fn.statements.append! stmt)
-```
+{% endraw %}
+{% endhighlight %}
+
 After we hit enter, we see that our function now contains a new statement:
 
 ![image](http://elimgoodman.com/assets/mocks/output/fn_with_statement.gif)
@@ -89,13 +94,14 @@ So, we got our program to run, but it was pretty involved. It would be super ann
 
 One thing that we haven't talked about is that not only is the *program* just a collection of Mesh objects, but the *editing environment* is also just comprised of instances of Mesh objects. We're going to take advantage of this fact to extend the editor with a new kind of interface element. Objects that only exist in the editing environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
 
-```clojure
+{% highlight clojure %}
+{% raw %}
 def extension_string """
 	Extension Runner:
 		fn : Fn
 		run():String ->
 				ref stdout ""
-				def vm \{\{VM :stdout stdout}}
+				def vm {{VM :stdout stdout}}
 				loop this.fn.statements statement
 					(vm.executeStatement! statement)
 				return context.stdout
@@ -104,16 +110,19 @@ def extension_string """
 
 def extension (Extension.fromString extension_string)
 (editor.extensions.add! extension)
-```
+{% endraw %}
+{% endhighlight %}
 
-We're creating an extension from a string, just like we did above with the statement. What that syntax specifies is that we're making a new extension (named Runner), and instances of the Runner extension will need to be provided with a function in our program. Runner extension instances will also have a method called "run" which takes no parameters, and returns a String. At the end of that snippet, we're adding the extension object to the editor's set of extensions. 
+We're creating an extension from a string, just like we did above with the statement. What that syntax specifies is that we're making a new extension (named Runner), and instances of the Runner extension will need to be provided with a function in our program. Runner extension instances will also have a method called "run" which takes no parameters, and returns a String.
 
 Now that the editor knows how to make Runner objects, so let's actually make one. We'll type this into the command bar:
 
-```clojure
-def runner \{\{Runner :fn fn}}
+{% highlight clojure %}
+{% raw %}
+def runner {{Runner :fn fn}}
 (cursor.getCurrentPerspective).(getCurrentPackage).regions.(append! runner)
-```
+{% endraw %}
+{% endhighlight %}
 
 And we hit enter:
 
@@ -135,10 +144,12 @@ All extensions have a user-editable UI that they present in the project view. Le
 
 Let's add a field to the Runner extension to store the state of stdout:
 
-```clojure
+{% highlight clojure %}
+{% raw %}
 def field_type (Type.fromString "&String")
 (extension.addField! :name "result" :type type)
-```
+{% endraw %}
+{% endhighlight %}
 
 Now our existing Runner instance now has a "result" field. We can see that it's currently set to the empty string:
 
@@ -164,18 +175,20 @@ def block (Block.fromString block_string :vm => (extension.getVM))
 
 Then let's update the UI:
 
-```clojure
+{% highlight clojure %}
+{% raw %}
 def panel_string """	
-	\{\{Row
-		\{\{StaticLabel "Result:"}}
-		\{\{DynamicLabel this.result}}
+	{{Row
+		{{StaticLabel "Result:"}}
+		{{DynamicLabel this.result}}
 	}}		
 """
 
 def panel (Panel.fromString panel_string)
 (extension.ui.setPanel! panel)
 (extension.ui.setFieldVisibility! :result False)
-```
+{% endraw %}
+{% endhighlight %}
 
 Tada! We now see that our Runner region has a much prettier label, and the result field is hidden:
 
@@ -188,7 +201,8 @@ And now, running our runner again should make the result appear:
 
 Nice! But let's say we want to take this one step further - let's have Mesh re-run our Runner every time we alter that function. To do that, we're going to introduce another new idea: **triggers**. Triggers are just snippets of Mesh code that get run whenever certain motions occur. Let's make a new trigger to kick off our Runner when our function is changed:
 
-```clojure
+{% highlight clojure %}
+{% raw %}
 def trigger_string """
 	Trigger:
 		region: fn
@@ -201,7 +215,8 @@ def trigger_string """
 
 def trigger (Trigger.fromString trigger_string :vm (editor.command_bar.getVM))
 (editor.triggers.add! trigger)
-```
+{% endraw %}
+{% endhighlight %}
 
 Now, let's alter our function:
 
