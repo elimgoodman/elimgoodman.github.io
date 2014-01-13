@@ -174,7 +174,7 @@ Tada! We now see that our Runner region has a much prettier label, and the resul
 
 ![image](http://elimgoodman.com/assets/mocks/output/runner_new_ui.gif)
 
-And now, running our runner again should make the result appear:
+And now, running our Runner again should make the result appear:
 
 ![image](http://elimgoodman.com/assets/mocks/output/runner_new_ui_result.gif)
 
