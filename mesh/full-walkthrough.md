@@ -57,19 +57,22 @@ Ah, that "fromString" method was convenient; using it meant that we didn't have 
 
 ###Running Our Program
 
-We're gonna take the really long way around on this one, but bear with us. This is where the magic happens. 
-
 Let's start out by just running our program via the command bar:
 
 ![image](http://elimgoodman.com/assets/mocks/output/running_program.gif)
 
-Don't worry too much about that VM stuff. What's important is that we can see there that ```vm.stdout``` is equal to "hello world". We did it!
+We can see there that ```vm.stdout``` is equal to "hello world". We did it! But what exactly did we do?
+
+In short, what we did above was create an execution environment (that's what {% raw %}```def vm {{VM :stdout}}```{% endraw %} is doing). We then manually executed each statement of our function in that environment. 
+
+While we don't have to get too deep into the exact mechanics of how Mesh code is run, it's important to note from the above example that we created a regular old Mesh object to help us run our function . So - not only is our program comprised of Mesh objects, but the actual execution environment is also represented as a Mesh object. This is very powerful, as it allows us to have a lot of control over and insight into how our program is run.
+
 
 #Let's Build Ourselves a Live Coding Environment
 
 So, we got our program to run, but it was pretty involved. It would be super annoying if we had to type all of that code into the command bar every time we wanted to run our program. Instead, let's create an object that can run our program for us. 
 
-One thing that we haven't talked about is that not only is the *program* just a collection of Mesh objects, but the *editing environment* is also just comprised of instances of Mesh objects. We're going to take advantage of this fact to extend the editor with a new kind of interface element. Objects that only exist in the editing environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
+One thing that we haven't talked about is that not only are the *program* and *execution environment* just regular Mesh objects, but the *editing environment* is also just comprised of instances of Mesh objects. We're going to take advantage of this fact to extend the editor with a new kind of interface element. Objects that only exist in the editing environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
 
 {% highlight clojure %}
 {% raw %}
