@@ -4,19 +4,9 @@ title: Mesh - Full Walkthrough
 ---
 {% include JB/setup %}
 
-TODO:
-
-* Language foundation at the beginning
-* Some sort of section on the workspace
-* Unify the syntax for adding a panel and creating a new extension
-* Change ExecutionContext to either Context or VM
-* Digging into an object to see how it works
-* I think I may have to simplify/change the language to make it easier to write a debugger - either more like Lisp, or more like assembly
-	* 	God, maybe there's some assembly-like sub-language that everything gets compiled into, and is also represented as Mesh objects, and the debugger taps into that layer
+#Startin' Real Basic: Hello World
 
 As our very first task, let's start with the basics: printing "Hello world" to the screen. Note that we're gonna be doing things the hard way at first, to give you a better idea of how Mesh works. 
-
-#Startin' Real Basic: Hello World
 
 ###Let's Make, like, just one function
 
