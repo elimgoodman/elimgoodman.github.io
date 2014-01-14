@@ -1,16 +1,16 @@
 ---
 layout: page
-title: Mesh - Full Walkthrough
+title: Mesh - Crash Course
 ---
 {% include JB/setup %}
 
 #Startin' Real Basic: Hello World
 
-As our very first task, let's start with the basics: printing "Hello world" to the screen. Note that we're gonna be doing things the hard way at first, to give you a better idea of how Mesh works. 
+As our very first task, let's start with the tried and true: printing "Hello world" to the screen. Note that we're gonna be doing things the hard way at first, to give you a better idea of how Mesh works.
 
 ###Let's Make, like, just one function
 
-When we open Mesh, we're shown a new, blank project: 
+When we open Mesh, we're shown a new, blank project:
 
 ![image](http://elimgoodman.com/assets/mocks/output/blank_project.gif)
 
@@ -24,9 +24,9 @@ Next, we're going to enter two commands into the command bar, hitting enter afte
 
 And voila! A blank function appears!
 
-What just happened back there? Well, let's think of how we would describe what we just did. In a traditional programming language, the act of "creating a function" starts when the first letter of the function definition block is typed, and ends when the last letter is typed. In Mesh, the function is added in two fell swoop, all at once. We call these changes to our program **motions**. 
+What just happened back there? Well, let's think of how we would describe what we just did. In a traditional programming language, the act of "creating a function" starts when the first letter of the function definition block is typed, and ends when the last letter is typed. In Mesh, the function is created in one fell swoop, all at once (that's what the first command is). Then, it's attached to our program (the second command). We call changes to the entities in our program **motions**.
 
-Motions are extremely powerful. While the actual syntax of the commands isn't important right now, what you should note about them is that they are simply Mesh statements like any other, manipulating Mesh objects like any others. In other words, the *program we're building* is represented as an object in our system, and we can manipulate it using the full power of the Mesh language.
+Motions are extremely powerful. While the actual syntax of the commands isn't important right now, what you should note about them is that they are just regular Mesh statements, manipulating regular Mesh objects. In other words, the *program we're building* is represented as an object in our system, and we can manipulate it using the full power of the Mesh language.
 
 ###Changing Our Function's Name
 
@@ -34,9 +34,9 @@ Let's now make a change to our function. Remember, we're doing this the hard way
 
 ![image](http://elimgoodman.com/assets/mocks/output/name_changed_fn.gif)
 
-Note a few things here. First, we didn't have to create the symbol "fn" again - the command bar persists objects for you, just like a REPL would. Second, you can see that we're operating on our function region just like we would operate on an object with a traditional OO language - we're using predefined methods to alter its internal state. This is how *all* manipulations to your program take place in Mesh. It might seem cumbersome at first, but with a combination of hotkeys and practice, we've found that one actually becomes faster by using motions instead of text. 
+Note a few things here. First, we didn't have to create the symbol "fn" again - the command bar persists objects for you, just like a REPL would. Second, you can see that we're operating on our function region just like we would operate on an object with a traditional OO language - we're using predefined methods to alter its internal state. This is how *all* manipulations to your program take place in Mesh. It might seem cumbersome at first, but with a combination of hotkeys and practice, we've found that one actually becomes faster by using motions instead of text.
 
-Additionally, manipulating the program this way allows us to leverage the full power and expressivity of the Mesh language, while also maintaining the type and state safety guarantees that the languages provides us. What this adds up to is the ability to make changes to your program quickly, safely, and ambitiously. Mesh allows you to boldly refactor where you may have not dared before. 
+Additionally, manipulating the program this way allows us to leverage the full power and expressivity of the Mesh language, while also maintaining the type and state safety guarantees that the languages provides us. What this adds up to is the ability to make changes to your program quickly, safely, and ambitiously. Mesh allows you to boldly refactor where you may have not dared before.
 
 ###Adding a Statement
 
@@ -53,7 +53,7 @@ After we hit enter, we see that our function now contains a new statement:
 
 ![image](http://elimgoodman.com/assets/mocks/output/fn_with_statement.gif)
 
-Ah, that "fromString" method was convenient; using it meant that we didn't have to create all of the underlying objects that that statement requires (such as expressions and literals). All Mesh objects serialize and deserialize easily.
+Ah, that "fromString" method was convenient; using it meant that we didn't have to create all of the underlying objects that that statement requires (such as expressions and literals). All Mesh objects serialize and deserialize to text; Mesh programs are stored as text on disk, so you can still used familiar tools such as git and grep with them.
 
 ###Running Our Program
 
@@ -63,14 +63,14 @@ Let's start out by just running our program via the command bar:
 
 We can see there that ```vm.stdout``` is equal to "hello world". We did it! But what exactly did we do?
 
-In short, what we did above was create an execution environment (that's what {% raw %}```def vm {{VM :stdout}}```{% endraw %} is doing). We then manually executed each statement of our function in that environment. 
+In short, what we did above was create an execution environment (that's what {% raw %}```def vm {{VM :stdout}}```{% endraw %} is doing). We then manually executed each statement of our function in that environment.
 
 While we don't have to get too deep into the exact mechanics of how Mesh code is run, it's important to note from the above example that we created a regular old Mesh object to help us run our function . So - not only is our program comprised of Mesh objects, but the actual execution environment is also represented as a Mesh object. This is very powerful, as it allows us to have a lot of control over and insight into how our program is run.
 
 
 #Let's Build Ourselves a Live Coding Environment
 
-So, we got our program to run, but it was pretty involved. It would be super annoying if we had to type all of that code into the command bar every time we wanted to run our program. Instead, let's create an object that can run our program for us. 
+So, we got our program to run, but it was pretty involved. It would be super annoying if we had to type all of that code into the command bar every time we wanted to run our program. Instead, let's create an object to help us run our program easily.
 
 One thing that we haven't talked about is that not only are the *program* and *execution environment* just regular Mesh objects, but the *editing environment* is also just comprised of instances of Mesh objects. We're going to take advantage of this fact to extend the editor with a new kind of interface element. Objects that only exist in the editing environment and have no bearing on the execution of the program are called **extensions**. We'll be creating an extension to run our program for us and display the output. We'll call it, creatively, Runner. Let's type this in the command bar:
 
@@ -85,7 +85,7 @@ def extension_string """
 				loop this.fn.statements statement
 					(vm.executeStatement! statement)
 				return context.stdout
-					
+
 """
 
 def extension (Extension.fromString extension_string)
@@ -93,7 +93,7 @@ def extension (Extension.fromString extension_string)
 {% endraw %}
 {% endhighlight %}
 
-We're creating an extension from a string, just like we did above with the statement. What that syntax specifies is that we're making a new extension (named Runner), and instances of the Runner extension will need to be provided with a function in our program. Runner extension instances will also have a method called "run" which takes no parameters, and returns a String.
+We're creating an extension from a string, just like we did above with the statement. What that syntax specifies is that we're making a new extension (named Runner), and instances of the Runner extension will need to be provided with a function as a parameter. Runner extension instances will also have a method called "run" which takes no parameters, and returns a String.
 
 Now that the editor knows how to make Runner objects, so let's actually make one. We'll type this into the command bar:
 
@@ -114,13 +114,13 @@ And look at that! We see a Runner in our project, with its function set to our "
 
 And the right thing came out! Yay!
 
-However, this isn't too much of an improvement. After all, why have that Runner region sitting there on our screen? We can't really interact with it meaningfully, except to change the function that it runs. Let's make the UI of that element a little more helpful. 
+However, this isn't too much of an improvement. After all, why have that Runner region sitting there on our screen? We can't really interact with it meaningfully, except to change the function that it runs. Let's make the UI of that element a little more helpful.
 
-All extensions have a user-editable UI that they present in the project view. Let's make our Runner display the output of its last run right in the region. To do that, we need to do three things: 
+All extensions have a user-editable UI that they present in the project view. Let's make our Runner display the output of its last run right in the region. To do that, we need to do three things:
 
 1. Alter the Runner extension to store the state of stdout after it's been run.
-2. Update the "run" method to update the result after running 
-3. Update the UI of the extension to display that information. 
+2. Update the "run" method to update the result after running
+3. Update the UI of the extension to display that information.
 
 Let's add a field to the Runner extension to store the state of stdout:
 
@@ -157,20 +157,19 @@ Then let's update the UI:
 
 {% highlight clojure %}
 {% raw %}
-def panel_string """	
+def panel_string """
 	{{Row
 		{{StaticLabel "Result:"}}
 		{{DynamicLabel this.result}}
-	}}		
+	}}
 """
 
 def panel (Panel.fromString panel_string)
 (extension.ui.setPanel! panel)
-(extension.ui.setFieldVisibility! :result False)
 {% endraw %}
 {% endhighlight %}
 
-Tada! We now see that our Runner region has a much prettier label, and the result field is hidden:
+Tada! We now see that our Runner region is looking much prettier:
 
 ![image](http://elimgoodman.com/assets/mocks/output/runner_new_ui.gif)
 
@@ -190,7 +189,7 @@ def trigger_string """
 		action: #(
 			(runner.run)
 		)
-		
+
 """
 
 def trigger (Trigger.fromString trigger_string :vm (editor.command_bar.getVM))

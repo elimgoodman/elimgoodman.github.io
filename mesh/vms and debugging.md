@@ -1,5 +1,3 @@
------
-
 So now we've added our lovely function with its one statement, and we've successfully run it and seen the output. Now, let's investigate how debugging happens in Mesh.
 
 First, we're going to fast-forward a bit and make our project slightly more complex:

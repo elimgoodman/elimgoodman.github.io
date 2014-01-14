@@ -1,6 +1,7 @@
 body {
    font-family: museo-sans, serif;
    font-size: 18px;
+   padding-bottom: 48px;
 }
 
 h1, h2, h3 {
@@ -11,11 +12,12 @@ h1, h2, h3 {
 
 h1 {
 	font-size: 64px;
+	margin: 18px 0;
 }
 
 h2 {
 	font-size: 32px;
-	margin: 0;
+	margin: 9px 0;
 }
 
 h3 {

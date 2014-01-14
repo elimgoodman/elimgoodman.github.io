@@ -3,23 +3,6 @@ layout: page
 title: Mesh - Foundations
 ---
 {% include JB/setup %}
-TODO:
-* Add $perspective to motion description?
-* Add a note about keybindings
-* Add note that syntax is not set in stone
-* Glossary of terms - and make sure I use them consistently throughout
-* Remove the dollar signs from variables, they're unnecessary and confusing
-* Display helpers - both concept instances and overlays have them. Each metadata type or concept type can have a display helper that it uses automatically...? Or maybe there's an explicit mapping
-* "Editor space"
-	* 	composing the program out of packages - each package has a code space and editor space piece. editor improvements can be composed as easily as the program itself
-
-
-MISC:
-
-The design intention of Mesh is to combine the best features of modern IDEs (autocomplete, integrated debugging, powerful refactoring tools) with some of the power, flexibility, and "user-hackability" of Emacs. The end goal is to enable proficient programmers to create and modify programs with greater efficiency, less risk, and less frustration. We intend to achieve this combination by relying on few core principles. We believe that a tight coupling between the editor and the language being edited allows the computer to "understand" the program on a deeper level, and thus offer more assistance. We also believe that, instead of a Unix-style hyper-modular approach to extensibility, we believe that a well-chosen set of APIs and internal concepts is the correct path to extensibility for this kind of program. Most importantly, we believe that, by imposing well-chosen constraints upon themselves, programmers can achieve more efficiency and clarity using less brainpower and incurring less risk. Mesh allows you to take freedom away from yourself when you don't need it, simplifying the task at hand and decreasing the possibility of introducing certain kinds of errors.
-
-A core idea is mental efficiency - make the code match your mental model, offload the things you don't need to care about
-
 
 Hi! I'm going to telling you about Mesh, a new way to build computer programs. You can think of Mesh like an IDE and a language smushed together. It draws a lot of inspiration from Smalltalk, Clojure, Emacs, and many other programming technologies.
 
