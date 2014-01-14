@@ -4,6 +4,8 @@ title: Mesh - Crash Course
 ---
 {% include JB/setup %}
 
+IMPRESSIONS: moves way too fast, is overwhelming. too many concepts and ideas. needs more pacing and development at the different levels. basic, intermediate, advanced. you have to be able to derive value at each point. question - start with everything all configured for a novice, all abstractions built, or start with nothing and build up to complex things. the first questions answers "what do you know this can do", and the other says "here are some very cool pieces." I like the second one. it just has to be exactly the right pieces - it can't be all of them. this vm stuff - interesting, but irrelevant to the stated use case. it was helpful to re-read that overview. having a narrowing principle like that is helpful. 
+
 #Startin' Real Basic: Hello World
 
 As our very first task, let's start with the tried and true: printing "Hello world" to the screen. Note that we're gonna be doing things the hard way at first, to give you a better idea of how Mesh works.
@@ -34,7 +36,7 @@ Let's now make a change to our function. Remember, we're doing this the hard way
 
 ![image](http://elimgoodman.com/assets/mocks/output/name_changed_fn.gif)
 
-Note a few things here. First, we didn't have to create the symbol "fn" again - the command bar persists objects for you, just like a REPL would. Second, you can see that we're operating on our function region just like we would operate on an object with a traditional OO language - we're using predefined methods to alter its internal state. This is how *all* manipulations to your program take place in Mesh. It might seem cumbersome at first, but with a combination of hotkeys and practice, we've found that one actually becomes faster by using motions instead of text.
+Note a few things here. First, we didn't have to create the symbol "fn" again - the command bar persists objects for you, just like a REPL would. Second, you can see that we're operating on our function region just like we would operate on an object with a traditional OO language - we're using predefined methods to alter its internal state. This is how *all* manipulations to your program take place in Mesh. It might seem cumbersome at first, but with a combination of hotkeys and practice, we've found that one actually becomes faster by using motions instead of text-based manipulations.
 
 Additionally, manipulating the program this way allows us to leverage the full power and expressivity of the Mesh language, while also maintaining the type and state safety guarantees that the languages provides us. What this adds up to is the ability to make changes to your program quickly, safely, and ambitiously. Mesh allows you to boldly refactor where you may have not dared before.
 
@@ -56,6 +58,8 @@ After we hit enter, we see that our function now contains a new statement:
 Ah, that "fromString" method was convenient; using it meant that we didn't have to create all of the underlying objects that that statement requires (such as expressions and literals). All Mesh objects serialize and deserialize to text; Mesh programs are stored as text on disk, so you can still used familiar tools such as git and grep with them.
 
 ###Running Our Program
+
+TKTKTKTKT introduce this more
 
 Let's start out by just running our program via the command bar:
 
