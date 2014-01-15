@@ -4,8 +4,6 @@ title: Mesh - Crash Course
 ---
 {% include JB/setup %}
 
-IMPRESSIONS: moves way too fast, is overwhelming. too many concepts and ideas. needs more pacing and development at the different levels. basic, intermediate, advanced. you have to be able to derive value at each point. question - start with everything all configured for a novice, all abstractions built, or start with nothing and build up to complex things. the first questions answers "what do you know this can do", and the other says "here are some very cool pieces." I like the second one. it just has to be exactly the right pieces - it can't be all of them. this vm stuff - interesting, but irrelevant to the stated use case. it was helpful to re-read that overview. having a narrowing principle like that is helpful. 
-
 #Startin' Real Basic: Hello World
 
 As our very first task, let's start with the tried and true: printing "Hello world" to the screen. Note that we're gonna be doing things the hard way at first, to give you a better idea of how Mesh works.
@@ -59,9 +57,7 @@ Ah, that "fromString" method was convenient; using it meant that we didn't have 
 
 ###Running Our Program
 
-TKTKTKTKT introduce this more
-
-Let's start out by just running our program via the command bar:
+We're now ready to run our program. The way we're going to do that is by creating a special kind of Mesh objected called a **VM**. A VM is exactly what it sounds like - a virtual computer that can execute Mesh statements. Let's see how it works:
 
 ![image](http://elimgoodman.com/assets/mocks/output/running_program.gif)
 
@@ -69,7 +65,7 @@ We can see there that ```vm.stdout``` is equal to "hello world". We did it! But 
 
 In short, what we did above was create an execution environment (that's what {% raw %}```def vm {{VM :stdout}}```{% endraw %} is doing). We then manually executed each statement of our function in that environment.
 
-While we don't have to get too deep into the exact mechanics of how Mesh code is run, it's important to note from the above example that we created a regular old Mesh object to help us run our function . So - not only is our program comprised of Mesh objects, but the actual execution environment is also represented as a Mesh object. This is very powerful, as it allows us to have a lot of control over and insight into how our program is run.
+While we don't have to get too deep into the exact mechanics of how Mesh code is run, it's important to note from the above example that we created a regular old Mesh object to help us run our function . So - not only is our *program* comprised of Mesh objects, but the actual *execution environment* is also represented as a Mesh object. This is very powerful, as it allows us to have a lot of control over and insight into how our program is run.
 
 
 #Let's Build Ourselves a Live Coding Environment

@@ -1,6 +1,12 @@
-In the previous video, we talked about the basic ideas that Mesh builds upon - how it represents the program that you're working on, and how we can make changes to that program. In this video, we're going to talk about how we can extend Mesh to make it "fit our hands" better, to better represent the domain we're working in. 
+---
+layout: page
+title: Mesh
+---
+{% include JB/setup %}
 
-As we talked about in the previous video, Mesh provides a vocabulary of nouns and verbs that facilitate making changes to your program. Mesh allows you to add both nouns and verbs to the system. Adding nouns is how we can add new kinds of declarative data to our system, while adding verbs will allow us to make changes to our program safely and efficiently.
+#Make It Declarative: Concepts
+
+Mesh's objective is to 
 
 Adding nouns to a Mesh program is done by creating a new **concept**, the object that we avoided talking about in the last video. A concept, at first glance, should look very similar to a struct - it has a series of fields with types, and methods. So why do they exist? Well, when we create a new concept, that concept can now be treated a noun in our vocabulary. We can create motions that operate over instances of that concept, just as we can make motions that operate over all of the functions or structs in our program.
 
