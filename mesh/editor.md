@@ -16,10 +16,10 @@ Because each "slot" in the structure is typed, the editor could be helpful when 
 
 ![image](http://elimgoodman.com/assets/mocks/output/first_add.png)
 
-However, it'd be pretty hard to understand the language if all the statements looked like that. Thus, the user has the ability to change how that kind of statement is rendered (within certain constraints - we want to make sure that the resulting form is still editable with the keyboard and reflowable on different screen sizes). The user can change how the statement is displayed by creating some additional declarative structures (those ```ConceptUI``` blocks):
+However, it'd be pretty hard to understand the language if all the statements looked like that. Thus, the user has the ability to change how that kind of statement is rendered (within certain constraints - we want to make sure that the resulting form is still editable with the keyboard and reflowable on different screen sizes). The user can change how the statement is displayed by creating some additional declarative structures (that's what those ```ConceptUI``` blocks are):
 
 ![image](http://elimgoodman.com/assets/mocks/output/second.png)
 
-With enough effort, that giant clunky structure we had at the beginning can be massaged to look like something that might appear in a regular programming language:
+With enough effort, that giant clunky structure we had at the beginning can be massaged to look like something that might appear in a regular programming language (note that the necessary ```ConceptUI``` blocks have been hidden):
 
 ![image](http://elimgoodman.com/assets/mocks/output/third.png) 
