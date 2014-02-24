@@ -4,12 +4,20 @@ title: Mesh
 ---
 {% include JB/setup %}
 
-#The Structure Editor
+#A Structure Editor
+
+Here are some screenshots of a structure editor prototype that I put together a little while ago. The general idea was to represent all elements of both the program itself and the editor configuration using a uniform, declarative form. Given this uniform underlying representation, the user could then be allowed to modify how those structures appeared and were operated on, using some additional information provided in the same format. As a small example, here's how a very simple function might be represented:
 
 ![image](http://elimgoodman.com/assets/mocks/output/first.png)
 
+Because each "slot" in the structure is typed, the editor could be helpful when it comes time to add another statement in that function:
+
 ![image](http://elimgoodman.com/assets/mocks/output/first_add.png)
+
+However, it'd be pretty hard to understand the language if all the statements looked like that. Thus, the user has the ability to change how that kind of statement is rendered (within certain constraints - we want to make sure that the resulting form is still editable with the keyboard and reflowable on different screen sizes). The user can change how the statement is displayed by creating some additional declarative structures (those ```ConceptUI``` blocks):
 
 ![image](http://elimgoodman.com/assets/mocks/output/second.png)
 
-![image](http://elimgoodman.com/assets/mocks/output/third.png)
+With enough effort, that giant clunky structure we had at the beginning can be massaged to look like something that might appear in a regular programming language:
+
+![image](http://elimgoodman.com/assets/mocks/output/third.png) 
