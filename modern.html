@@ -8,56 +8,56 @@ title: Thoroughly Modern
 	body {
 		padding: 0;
 		margin: 0;
-	}
-
-	h1 {
+		background: url("/assets/images/man.jpg") no-repeat;
+		background-size: cover;
 		font-family: 'Helvetica';
+		color: #333;
 		font-weight: bold;
-		padding: 0;
-		margin: 0;
+		font-size: 36px;
 	}
 
-	#header-container {
-		margin: 40px;
-		text-align: right;
-		font-size: 100px;
-		/*text-shadow: 1px 1px 1px black;*/
-	}
-
-	#thoroughly {
+	#header {
+		font-size: 66px;
 		color: #333;
 	}
 
-	#modern {
+	#content {
+		margin: 64px;
+	}
+
+	.modern {
 		color: white;
-		text-shadow: 1px 1px 1px #333;
+		text-shadow: 0 1px 2px #333;
 	}
 
-	#sidebar {
-		background: url("/assets/images/man.jpg") no-repeat scroll -415px 0 / cover  rgba(0, 0, 0, 0);
-		height: 100%;
-		float: left;
+	#header-container {
+		margin-bottom: 36px;
 	}
 
-	.bar {
-		width: 25%;
-		height: 100%;
-		float: left;
+	#meat {
 	}
 
-	#bar-2 {
-		background: url("/assets/images/poster.jpg") no-repeat scroll -50px 0 / cover  rgba(0, 0, 0, 0);
+	#meat > div {
+		margin-bottom: 12px;
 	}
-	#bar-3 {
-		background: url("/assets/images/tate.jpg") no-repeat scroll -50px 0 / cover  rgba(0, 0, 0, 0);
+
+	#deets {
+		margin-top: 128px;
 	}
+
 </style>
-
-<div id="sidebar" class="bar">
+<div id="content">
 	<div id="header-container">
-		<h1 id="thoroughly">Thoroughly</h1>
-		<h1 id="modern">Modern</h1>
+		<span id="header"><span id="first">A thoroughly</span> <span class="modern">modern</span> birthday.</span>
+	</div>
+
+	<div id="meat">
+			<div><span class="modern">Modern</span> tastes.</div>
+			<div><span class="modern">Modern</span> sights.</div>
+			<div><span class="modern">Modern</span> sounds.</div>
+	</div>
+
+	<div id="deets">
+		11 W 53rd St. 3:00 PM. Dress <span class="modern">modern</span>.
 	</div>
 </div>
-<div id="bar-2" class="bar"></div>
-<div id="bar-3" class="bar"></div>
