@@ -3,15 +3,6 @@ layout: page
 title: Stepwise
 ---
 
-### In Brief
-
-- Stepwise is a tool to transform, analyze, and visualize data
-- Everything you do is non-destructive - you can go backwards and forwards in time
-- Schemas ensure that everything fits together
-- Visualize and explore data at every step
-- Runs on top of hardcore cloud computing infrastructure - work with huge datasets quickly
-
-
 ###What it Stepwise?
 
 Stepwise is a tool for working with data. Stepwise makes it easy to transform, analyze, and visualize large quantities of data in an interactive, visual, and non-destructive fashion. Stepwise is like a combination of a REPL, a spreadsheet, and a full-fledged programming environment.
