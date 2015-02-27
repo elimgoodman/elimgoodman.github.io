@@ -17,7 +17,7 @@ title: Cyclops
 
 ### Motivation
 
-In my current job, I'm the sole developer/ops person for a small website. Even though the site is relatively simple and doesn't get a ton of traffic, it produces a good amount of data, in the form of logs, front- and back-end events, reports, and database tables (note: I'm talking about usage data here, not data about the infrastructure of the site i.e. resource usage over time).  I currently use a mish-mash of tools to deal with coalescing and analyzing this data: Mixpanel for events, Papertrail for logs, Adminium for some database stuff, and then lots of hand-rolled code to generate reports and dashboards. Additionally, I'm often handed CSV files that I need to clean up and cross-reference with existing site data. 
+In my current job, I'm the sole developer/ops person for a small website. Even though the site is relatively simple and doesn't get a ton of traffic, it emits a good amount of data, in the form of logs, front- and back-end events, reports, and database tables (note: I'm talking about usage data here, not data about the infrastructure of the site i.e. resource usage over time).  I currently use a mish-mash of tools to deal with coalescing and analyzing this data: Mixpanel for events, Papertrail for logs, Adminium for some database stuff, and then lots of hand-rolled code to generate reports and dashboards. Additionally, I'm often handed CSV files that I need to clean up and cross-reference with existing site data. 
 
 While my current solutions are OK, they're limiting in some key ways:
 
@@ -26,16 +26,16 @@ While my current solutions are OK, they're limiting in some key ways:
 - Because the site is currently small, using hacky tools works. However, as the site scales up, I'm dreading the prospect of having to migrate everything to some other platform.
 - Specifying dependencies between or variations of individual reports is extremely difficult, and I've solved the problems I've encountered in extremely inelegant ways
 
-I explored some existing solutions, but they fell short on a few dimensions:
+I explored some existing products, but they fell short on a few dimensions:
 
-- The kinds of transformations and explorations that I need to do are not well supported by current "business intelligence" tools. Most just offer SQL as the way to explore data.
+- The kinds of transformations and explorations that I need to do are not well supported by current "business intelligence" tools. Most just offer SQL as the way to manipulate data.
 - They were not geared towards ingesting stream-like data (logs, events).
 - Price and "enterprise-yness". Seriously! I couldn't actually play around with most of the things I was interested in. They also cost a bajillion dollars.
 
 
 ### What I Want
 
-I want a **Heroku for data**. In the same way that Heroku takes raw computing resources and packages them together into a highly-abstracted, easy-to-use, easy-to-scale platform, I want a system that does the same for the usage data that my site produces. Specifically, I want a system that makes no mentions of clusters, jobs, or pipelines. All of the "big data" stuff should be abstracted away. 
+I want a **Heroku for data**. In the same way that Heroku takes raw computing resources and packages them together into a highly-abstracted, easy-to-use, easy-to-scale platform, I want a system that does the same for the usage data that my site produces. Additionally, I want a system that makes no mentions of clusters, jobs, or pipelines. All of the "big data" stuff should be abstracted away.
 
 In terms of capabilities, I want a product that makes it very easy to:
 
@@ -55,7 +55,7 @@ We'll start with the sources. Here we see that a database has already been added
 
 Adding logs should be similarly easy. Just add a syslog drain to your app, and Cyclops would start aggregating your logs.
 
-<div style="margin-bottom: 24px;"><a href="images/full/databases.png"><img src="images/thumbs/databases.png" /></a></div>
+<div style="margin-bottom: 24px;"><a href="images/full/logs.png"><img src="images/thumbs/logs.png" /></a></div>
 
 I didn't mock up events or APIs, but they would ideally be similarly simple. For events, I would imagine being able to POST to an arbitrary endpoint to record information from the front- or back-end of the site. The user could also add arbitrary API endpoints who results would be ingested at regular intervals.
 
@@ -73,15 +73,15 @@ Let's say we select the `events` table. We see it appear in our flow:
 
 <div style="margin-bottom: 24px;"><a href="images/full/source-chosen.png"><img src="images/thumbs/source-chosen.png" /></a></div>
 
-There it is! We see the source itself (the green box), as well as a preview of the data flowing out of the source. If we click on the icon in the upper left of the data preview, we can take some actions on that relation:
+There it is! We see the source itself (the green box), as well as a preview of the data flowing out of the source. If we click on the icon in the upper right of the data preview, we can take some actions on that relation:
 
 <div style="margin-bottom: 24px;"><a href="images/full/relation-actions.png"><img src="images/thumbs/relation-actions.png" /></a></div>
 
-There are three primary actions available:
+There are three actions available:
 
 - **Refine**: we can take the relation and (non-destructively) filter, sort, group, or transform it in some way
 - **Visualize**: we can turn the data into a pretty picture
-- **Sink**: we can indicate that this relation is one that we want to access from outside the flow - either from another flow, or from the outside world (as a report or whatever)
+- **Sink**: we can indicate that this relation is one that we want too access from outside the flow - either from another flow, or from the outside world (as a report or whatever)
 
 Let's say we choose to **refine** that relation. We see something like this:
 
@@ -119,6 +119,7 @@ This is only a cursory exploration of what such a system might look like. There 
 - Parameterized statements/jobs
 - Utilizing user-defined functions
 - Data schemas + pipeline validation
+- Making huge, super-complex flows (might be difficult to do in a visual manner)
 - The interface that non-technical people could use to get reports and see visualizations
 
 However, even though this is preliminary, I have built a (very ugly) prototype that allows me to suck in a big CSV and build flows around it, using Pig and D3. I don't know if it scales, but I like using it (I actually use it today for day to day work), so that's something!
