@@ -26,11 +26,13 @@ While my current solutions are OK, they're limiting in some key ways:
 - Because the site is currently small, using hacky tools works. However, as the site scales up, I'm dreading the prospect of having to migrate everything to some other platform.
 - Specifying dependencies between or variations of individual reports is extremely difficult, and I've solved the problems I've encountered in extremely inelegant ways
 
-I explored some existing products, but they fell short on a few dimensions:
+I explored some existing "business intelligence" products, but they fell short on a few dimensions:
 
-- The kinds of transformations and explorations that I need to do are not well supported by current "business intelligence" tools. Most just offer SQL as the way to manipulate data.
+- All of the tools that I found were built for less technical people. I was looking for something that was closer to an IDE than to a out-of-the-box solution.
+- To that end, the kinds of transformations and explorations that I need to do were not well supported. Most just offer SQL as the way to manipulate data.
 - They were not geared towards ingesting stream-like data (logs, events).
 - Price and "enterprise-yness". Seriously! I couldn't actually play around with most of the things I was interested in. They also cost a bajillion dollars.
+- [Hue](http://gethue.com/) is *so close* to what I was looking for, but unfortunately it's very confusing and poorly designed. It's also hard to get up and running quickly.
 
 
 ### What I Want
@@ -113,7 +115,7 @@ And that's all I've got!
 
 ### Unexplored Territory
 
-This is only a cursory exploration of what such a system might look like. There are a bunch of things that I haven't given a bunch of thought to:
+This is only a cursory exploration of what such a system might look like. There are a bunch of things that I haven't given much thought to:
 
 - Joins between data sources
 - Parameterized statements/jobs
