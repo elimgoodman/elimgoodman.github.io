@@ -1,11 +1,14 @@
 body {
-   font-family: museo-sans, serif;
+   font-family: "lato", sans-serif;
    font-size: 18px;
    padding-bottom: 48px;
+   font-weight: 400;
+   color: #333;
 }
 
-h1, h2, h3 {
-	font-family: cubano, sans-serif;
+h1, h2 {
+	font-family: "acuta", serif;
+	font-style: italic;
 	border-bottom: none;
 	color: #333;
 }
@@ -13,15 +16,18 @@ h1, h2, h3 {
 h1 {
 	font-size: 64px;
 	margin: 18px 0;
+	font-weight: 800;
 }
 
 h2 {
 	font-size: 32px;
 	margin: 9px 0;
+	font-weight: 400;
 }
 
 h3 {
 	font-size: 24px;
+	font-weight: 700;
 	margin: 18px 0;
 }
 
@@ -45,7 +51,9 @@ a {
 }
 
 a.media-link {
-	font-family: cubano, sans-serif;
+	font-family: "acuta", sans-serif;
+	font-weight: 800;
+	font-style: italic;
 	font-size: 28px;
 	margin-right: 18px;
 	border-bottom: none;
