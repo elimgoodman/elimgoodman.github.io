@@ -1,0 +1,50 @@
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+</head>
+<body>
+	<div id="example"></div>
+	    <script type="text/jsx">
+	    var Item = React.createClass({
+	    	render: function() {
+	    		switch(this.props.item.type) {
+	    			case ":image":
+	    				return <img src={this.props.item.data.url} />
+	    			case ":link":
+	    				return <div>
+	    					<a href={this.props.item.data.url}>{this.props.item.data.title}</a>
+	    					<div>{this.props.item.data.description}</div>
+	    				</div>;
+    				case ":song":
+    					return <div>
+    						<a href={this.props.item.data.url}>{this.props.item.data.title}</a>
+    						<div>{this.props.item.data.description}</div>
+    					</div>;
+	    		}
+
+	    		return <span />;
+	    	}
+	    })
+
+	    var Items = React.createClass({
+	    	render: function() {
+	    		var items = this.props.items.map(function(item) {
+	    			return <Item item={item} />;
+	    		})
+
+	    		return <ul>{items}</ul>;
+	    	}
+	    });
+
+	    $.getJSON("https://stash-dev.herokuapp.com/api/all-items", {}, function(result) {
+	    	console.log(result);
+		      React.render(
+		        <Items items={result} />,
+		        document.getElementById('example')
+		      );
+	    })
+	    </script>
+</body>
+</html>
