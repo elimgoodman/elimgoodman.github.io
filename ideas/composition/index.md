@@ -224,3 +224,6 @@ Reiterating the initial goal: we want to figure out a way to make it easier to c
 ##Something cogent.
 
 Let's do two things to move this mass of ideas
+
+
+TKTKTKTKTKTKT: **There are different "kinds" of functions/computational units**
