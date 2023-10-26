@@ -1,0 +1,23 @@
+{
+  "name": "elimgoodman.github.io",
+  "version": "1.0.0",
+  "description": "The quickest way to start and publish your Jekyll powered blog. 100% compatible with GitHub pages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elimgoodman/elimgoodman.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elimgoodman/elimgoodman.github.io/issues"
+  },
+  "homepage": "https://github.com/elimgoodman/elimgoodman.github.io#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
