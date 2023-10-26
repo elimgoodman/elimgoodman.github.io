@@ -11,3 +11,5 @@ Thumbs.db
 *.sublime-project
 .rvmrc
 *.lock
+
+node_modules/
