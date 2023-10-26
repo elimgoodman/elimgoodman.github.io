@@ -1,5 +1,6 @@
 ---
 layout: page.njk
+title: Social Infrastructure
 ---
 
 ### Social Infrastructure
